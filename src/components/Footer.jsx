@@ -12,7 +12,7 @@ export default function Footer() {
       className="px-4 pt-10 mt-auto"
       style={{ backgroundColor: "#1E1E1E", color: "#F0F0F0" }}
     >
-      <div className="grid grid-cols-1 gap-10 mx-auto text-sm max-w-7xl sm:grid-cols-2 md:grid-cols-3 sm:text-base">
+      <div className="grid grid-cols-1 gap-10 mx-auto text-sm max-w-7xl sm:grid-cols-2 md:grid-cols-4 sm:text-base">
         {/* Company Info */}
         <div>
           <h4 className="mb-3 text-lg font-bold" style={{ color: "#FF4C00" }}>
@@ -22,26 +22,6 @@ export default function Footer() {
             Reliable and affordable electronics repair, hardware servicing,
             software installation, and custom solutions.
           </p>
-
-          {/* Social Links */}
-          <div className="mt-6">
-            <h4 className="mb-3 text-lg font-bold" style={{ color: "#FF4C00" }}>
-              Social Links
-            </h4>
-            <div className="flex items-center gap-4">
-              <a
-                href="https://wa.me/919790741494"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition"
-                style={{ color: "#F0F0F0" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#25D366")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#F0F0F0")}
-              >
-                <FaWhatsapp size={24} />
-              </a>
-            </div>
-          </div>
         </div>
 
         {/* Quick Links */}
@@ -87,6 +67,26 @@ export default function Footer() {
               </Link>
             </li>
           </ul>
+        </div>
+
+        {/* Social Links (moved here) */}
+        <div>
+          <h4 className="mb-3 text-lg font-bold" style={{ color: "#FF4C00" }}>
+            Social Links
+          </h4>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://wa.me/919790741494"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition"
+              style={{ color: "#F0F0F0" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#25D366")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#F0F0F0")}
+            >
+              <FaWhatsapp size={24} />
+            </a>
+          </div>
         </div>
 
         {/* Contact Info */}
