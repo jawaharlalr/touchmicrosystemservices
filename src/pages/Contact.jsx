@@ -128,8 +128,7 @@ export default function Contact() {
               />
               <div>
                 <p className="font-semibold">Working Hours</p>
-                <p>Mon - Sat: 8:30 AM – 7:30 PM</p>
-                <p>Sunday: Closed</p>
+                <p>Mon - Sun: 8:30 AM – 7:30 PM</p>
               </div>
             </div>
           </div>
