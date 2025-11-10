@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -12,8 +14,12 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Smooth scroll to section (handles all pages)
   const scrollToSection = (id) => {
-    if (id) {
+    if (location.pathname !== "/") {
+      // Navigate to home first, then scroll after navigation completes
+      navigate("/", { state: { scrollTo: id } });
+    } else {
       const section = document.getElementById(id);
       if (section) {
         section.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -22,8 +28,13 @@ export default function Navbar() {
     setIsOpen(false);
   };
 
+  // Scroll to top of page (used for logo, About Us, Contact)
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (location.pathname !== "/") {
+      navigate("/");
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
     setIsOpen(false);
   };
 
@@ -94,7 +105,6 @@ export default function Navbar() {
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Close Button inside menu */}
         <div className="flex justify-end p-4">
           <button
             onClick={() => setIsOpen(false)}
@@ -104,7 +114,6 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Menu Links */}
         <div className="flex flex-col items-center pt-10 space-y-6">
           <button
             onClick={() => scrollToSection("services")}
