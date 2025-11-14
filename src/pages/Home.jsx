@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { ArrowUp } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import { motion } from "framer-motion";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import HeroSection from "../components/sections/HeroSection";
 import WhyChooseUs from "../components/sections/WhyChooseUs";
@@ -13,6 +12,7 @@ import ProductsSection from "../components/sections/ProductsSection";
 import AccessoriesSection from "../components/sections/AccessoriesSection";
 import SecondHandProducts from "../components/sections/SecondHandProducts";
 import Gallery from "../components/sections/gallery";
+import GoogleReviews from "../components/sections/GoogleReviews";
 
 export default function Home() {
   const [showScroll, setShowScroll] = useState(false);
@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <div className="relative">
 
-      {/* -------------------------------- SEO IMPROVED -------------------------------- */}
+      {/* ------------------------------ SEO TAGS ------------------------------ */}
       <Helmet>
         <title>Touch Microsystems | Embedded Solutions & Electronics Services</title>
 
@@ -48,18 +48,15 @@ export default function Home() {
           name="description"
           content="Touch Microsystems provides embedded solutions, electronics repair, second-hand devices, IT hardware, accessories, and professional service support."
         />
-
         <meta
           name="keywords"
           content="Touch Microsystems, embedded systems, electronics repair, laptop service, computer repair, IT accessories, second hand computers, CCTV installation"
         />
-
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Touch Micro System Services" />
         <meta name="theme-color" content="#FF4C00" />
 
-        {/* Canonical URL */}
         <link rel="canonical" href="https://touchmicrosystems.in/" />
 
         {/* Open Graph */}
@@ -76,7 +73,7 @@ export default function Home() {
         <meta name="twitter:description" content="Explore embedded solutions, electronics repair, accessories, and more." />
         <meta name="twitter:image" content="https://www.touchmicrosystemservices.in/images/header.png" />
 
-        {/* Structured Data - Organization Schema */}
+        {/* Schema - LocalBusiness */}
         <script type="application/ld+json">{`
         {
           "@context": "https://schema.org",
@@ -106,11 +103,12 @@ export default function Home() {
         </div>
       </FadeIn>
 
-      {/* ---------------------- SECTIONS WITH BG IMAGE ----------------------- */}
+      {/* ---------------------- SECTIONS WITH BACKGROUND ---------------------- */}
       <div
         className="bg-center bg-cover"
         style={{ backgroundImage: "url('/images/home.jpg')" }}
       >
+
         <FadeIn delay={0.15}>
           <div id="gallery">
             <Gallery />
@@ -147,12 +145,32 @@ export default function Home() {
           </div>
         </FadeIn>
 
+        {/* ----------------------- GOOGLE REVIEWS ADDED ----------------------- */}
+        <FadeIn delay={0.43}>
+        </FadeIn>
+
         <FadeIn delay={0.45}>
           <ExtraInfo />
         </FadeIn>
+        
+        <FadeIn delay={0.45}>
+    <div
+      id="reviews"
+      className="py-10"
+      style={{
+        backgroundColor: "#1E1E1E",      // same as footer
+        color: "#F0F0F0",                // same footer text
+        borderTop: "2px solid #FF4C00",  // brand orange border
+        borderBottom: "2px solid #FF4C00"
+      }}
+    >
+      <GoogleReviews />
+    </div>
+  </FadeIn>
+
       </div>
 
-      {/* --------------------------- WHATSAPP BUTTON --------------------------- */}
+      {/* --------------------------- WHATSAPP BUTTON ---------------------------- */}
       <motion.a
         href="https://wa.me/919790741494?text=Hello%20Touch%20Micro%20System%20Services!"
         target="_blank"
