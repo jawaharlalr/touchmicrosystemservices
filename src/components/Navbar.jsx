@@ -1,6 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,26 +10,32 @@ export default function Navbar() {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll to section (handles all pages)
   const scrollToSection = (id) => {
     if (location.pathname !== "/") {
-      // Navigate to home first, then scroll after navigation completes
       navigate("/", { state: { scrollTo: id } });
     } else {
       const section = document.getElementById(id);
       if (section) {
-        section.scrollIntoView({ behavior: "smooth", block: "start" });
+        const offset = 80;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = section.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
       }
     }
     setIsOpen(false);
   };
 
-  // Scroll to top of page (used for logo, About Us, Contact)
   const scrollToTop = () => {
     if (location.pathname !== "/") {
       navigate("/");
@@ -38,13 +45,25 @@ export default function Navbar() {
     setIsOpen(false);
   };
 
+  const navLinks = [
+    { name: "Services", id: "services", type: "scroll" },
+    { name: "Products", id: "products", type: "scroll" },
+    { name: "Accessories", id: "accessories", type: "scroll" },
+    { name: "About Us", path: "/about-us", type: "link" },
+    { name: "Contact Us", path: "/contact-us", type: "link" },
+  ];
+
   return (
     <nav
-      className={`fixed w-full z-50 transition-all ${
-        scrolled ? "bg-[#1E1E1E] bg-opacity-90 shadow-lg" : "bg-transparent"
+      className={`fixed w-full z-[100] transition-all duration-300 ${
+        /* REMOVED TRANSPARENCY: Always bg-brand-black, solid border on scroll */
+        scrolled 
+          ? "py-1 bg-brand-black border-b border-white/10 shadow-2xl" 
+          : "py-4 bg-brand-black" 
       }`}
     >
-      <div className="relative flex items-center justify-between px-6 py-4 mx-auto max-w-7xl">
+      <div className="flex items-center justify-between px-6 mx-auto max-w-7xl">
+        
         {/* Logo */}
         <Link to="/" onClick={scrollToTop} className="flex items-center">
           <img
@@ -55,100 +74,100 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="absolute hidden space-x-10 transform -translate-x-1/2 md:flex left-1/2">
-          <button
-            onClick={() => scrollToSection("services")}
-            className="text-[#F0F0F0] hover:text-[#FF4C00] transition-colors"
-          >
-            Services
-          </button>
-          <button
-            onClick={() => scrollToSection("products")}
-            className="text-[#F0F0F0] hover:text-[#FF4C00] transition-colors"
-          >
-            Products
-          </button>
-          <button
-            onClick={() => scrollToSection("accessories")}
-            className="text-[#F0F0F0] hover:text-[#FF4C00] transition-colors"
-          >
-            Accessories
-          </button>
-          <Link
-            to="/about-us"
-            className="text-[#F0F0F0] hover:text-[#FF4C00] transition-colors"
-            onClick={scrollToTop}
-          >
-            About Us
-          </Link>
-          <Link
-            to="/contact-us"
-            className="text-[#F0F0F0] hover:text-[#FF4C00] transition-colors"
-            onClick={scrollToTop}
-          >
-            Contact Us
-          </Link>
+        <div className="items-center hidden p-1 border rounded-full md:flex bg-white/5 border-white/10">
+          {navLinks.map((link) => (
+            link.type === "scroll" ? (
+              <button
+                key={link.name}
+                onClick={() => scrollToSection(link.id)}
+                className="px-6 py-2 text-[10px] font-black tracking-[0.2em] text-gray-300 uppercase transition-all rounded-full hover:text-white hover:bg-white/10"
+              >
+                {link.name}
+              </button>
+            ) : (
+              <Link
+                key={link.name}
+                to={link.path}
+                onClick={scrollToTop}
+                className={`px-6 py-2 text-[10px] font-black tracking-[0.2em] uppercase transition-all rounded-full ${
+                  location.pathname === link.path 
+                    ? "text-white bg-brand-orange shadow-[0_0_20px_rgba(255,76,0,0.5)]" 
+                    : "text-gray-300 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                {link.name}
+              </Link>
+            )
+          ))}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-[#F0F0F0] focus:outline-none focus:ring-2 focus:ring-[#FF4C00] rounded-lg"
+          className="relative z-[110] p-2 text-gray-300 transition-colors md:hidden hover:text-brand-orange"
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <div
-        className={`md:hidden fixed top-0 right-0 h-screen w-64 bg-[#1E1E1E] shadow-lg transform transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex justify-end p-4">
-          <button
-            onClick={() => setIsOpen(false)}
-            className="text-[#F0F0F0] hover:text-[#FF4C00] focus:outline-none"
-          >
-            <X size={28} />
-          </button>
-        </div>
+      {/* --- MOBILE SIDEBAR (SOLID BLACK) --- */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Background Overlay - High opacity for solid feel */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 z-[101] bg-black/95"
+            />
+            
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.4, ease: "circOut" }}
+              className="fixed inset-y-0 right-0 z-[105] w-[85%] max-w-sm border-l bg-brand-black border-white/10 shadow-[20px_0_60px_rgba(0,0,0,1)]"
+            >
+              <div className="flex flex-col h-full p-8 pt-24 space-y-4">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    initial={{ opacity: 0, x: 40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    key={link.name}
+                  >
+                    {link.type === "scroll" ? (
+                      <button
+                        onClick={() => scrollToSection(link.id)}
+                        className="w-full p-4 text-2xl font-black text-left text-gray-400 uppercase transition-all border-b border-white/5 hover:text-brand-orange hover:pl-8 active:bg-white/5"
+                      >
+                        {link.name}
+                      </button>
+                    ) : (
+                      <Link
+                        to={link.path}
+                        onClick={scrollToTop}
+                        className={`block w-full p-4 text-2xl font-black text-left uppercase border-b border-white/5 transition-all hover:pl-8 active:bg-white/5 ${
+                          location.pathname === link.path ? "text-brand-orange" : "text-gray-400 hover:text-brand-orange"
+                        }`}
+                      >
+                        {link.name}
+                      </Link>
+                    )}
+                  </motion.div>
+                ))}
 
-        <div className="flex flex-col items-center pt-10 space-y-6">
-          <button
-            onClick={() => scrollToSection("services")}
-            className="w-full text-center text-lg text-[#F0F0F0] hover:text-[#FF4C00] py-2 transition-colors"
-          >
-            Services
-          </button>
-          <button
-            onClick={() => scrollToSection("products")}
-            className="w-full text-center text-lg text-[#F0F0F0] hover:text-[#FF4C00] py-2 transition-colors"
-          >
-            Products
-          </button>
-          <button
-            onClick={() => scrollToSection("accessories")}
-            className="w-full text-center text-lg text-[#F0F0F0] hover:text-[#FF4C00] py-2 transition-colors"
-          >
-            Accessories
-          </button>
-          <Link
-            to="/about-us"
-            className="w-full text-center text-lg text-[#F0F0F0] hover:text-[#FF4C00] py-2 transition-colors"
-            onClick={scrollToTop}
-          >
-            About Us
-          </Link>
-          <Link
-            to="/contact-us"
-            className="w-full text-center text-lg text-[#F0F0F0] hover:text-[#FF4C00] py-2 transition-colors"
-            onClick={scrollToTop}
-          >
-            Contact Us
-          </Link>
-        </div>
-      </div>
+                <div className="pt-12 pb-8 mt-auto border-t border-white/5">
+                   <p className="text-[10px] font-black tracking-widest text-gray-600 uppercase mb-4 text-center">Touch Micro Systems</p>
+                   <div className="w-12 h-1 mx-auto rounded-full bg-brand-orange" />
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

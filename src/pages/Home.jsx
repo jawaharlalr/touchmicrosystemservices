@@ -12,7 +12,6 @@ import ProductsSection from "../components/sections/ProductsSection";
 import AccessoriesSection from "../components/sections/AccessoriesSection";
 import SecondHandProducts from "../components/sections/SecondHandProducts";
 import Gallery from "../components/sections/gallery";
-import GoogleReviews from "../components/sections/GoogleReviews";
 
 export default function Home() {
   const [showScroll, setShowScroll] = useState(false);
@@ -25,178 +24,157 @@ export default function Home() {
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
-  // Animation wrapper
+  // Animation wrapper - Precision bezier for "hardware/tech" entry
   const FadeIn = ({ children, delay = 0 }) => (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, amount: 0.1 }}
+      className="w-full"
     >
       {children}
     </motion.div>
   );
 
+  // Section Divider - Subtle orange glow line on pure black
+  const Divider = () => (
+    <div className="w-full px-6 mx-auto max-w-7xl opacity-10">
+      <div className="h-px bg-gradient-to-r from-transparent via-[#FF4C00] to-transparent" />
+    </div>
+  );
+
   return (
-    <div className="relative">
-
-      {/* ------------------------------ SEO TAGS ------------------------------ */}
-      <Helmet>
+    <div className="relative min-h-screen bg-[#0A0A0A] text-gray-300 selection:bg-[#FF4C00] selection:text-white overflow-x-hidden font-sans">
+      
+       <Helmet>
         <title>Touch Microsystems | Embedded Solutions & Electronics Services</title>
-
         <meta
           name="description"
-          content="Touch Microsystems provides embedded solutions, electronics repair, second-hand devices, IT hardware, accessories, and professional service support."
+          content="Touch Microsystems offers embedded solutions, electronic products, second-hand devices, and accessories. Explore our innovative and reliable services."
         />
-        <meta
-          name="keywords"
-          content="Touch Microsystems, embedded systems, electronics repair, laptop service, computer repair, IT accessories, second hand computers, CCTV installation"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="robots" content="index, follow" />
-        <meta name="author" content="Touch Micro System Services" />
-        <meta name="theme-color" content="#FF4C00" />
+        <meta name="keywords" content="Touch Microsystems, embedded systems, electronics, second-hand products, accessories, services" />
 
-        <link rel="canonical" href="https://touchmicrosystems.in/" />
-
-        {/* Open Graph */}
+        
         <meta property="og:title" content="Touch Microsystems | Embedded Solutions & Electronics Services" />
-        <meta property="og:description" content="Electronics repair, embedded systems, accessories, and second-hand products." />
+        <meta property="og:description" content="Explore embedded solutions, electronics products, and accessories from Touch Microsystems." />
         <meta property="og:image" content="https://www.touchmicrosystemservices.in/images/header.png" />
         <meta property="og:url" content="https://touchmicrosystems.in/" />
         <meta property="og:type" content="website" />
-        <meta property="og:locale" content="en_IN" />
 
-        {/* Twitter */}
+        
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Touch Microsystems | Embedded Solutions & Electronics Services" />
-        <meta name="twitter:description" content="Explore embedded solutions, electronics repair, accessories, and more." />
+        <meta name="twitter:description" content="Explore embedded solutions, electronics products, and accessories from Touch Microsystems." />
         <meta name="twitter:image" content="https://www.touchmicrosystemservices.in/images/header.png" />
-
-        {/* Schema - LocalBusiness */}
-        <script type="application/ld+json">{`
-        {
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "name": "Touch Micro System Services",
-          "image": "https://www.touchmicrosystemservices.in/images/header.png",
-          "url": "https://touchmicrosystems.in/",
-          "telephone": "+91 9790741494",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "8/42, Mount Poonamallee Road, Ramachandran Nagar",
-            "addressLocality": "Iyyappanthangal",
-            "addressRegion": "Chennai",
-            "postalCode": "600056",
-            "addressCountry": "IN"
-          },
-          "description": "Laptop repair, desktop repair, accessories, embedded solutions, and electronics services.",
-          "priceRange": "₹₹"
-        }
-        `}</script>
       </Helmet>
 
-      {/* ---------------------------- HERO SECTION ---------------------------- */}
-      <FadeIn delay={0.1}>
-        <div id="hero">
-          <HeroSection />
-        </div>
-      </FadeIn>
-
-      {/* ---------------------- SECTIONS WITH BACKGROUND ---------------------- */}
-      <div
-        className="bg-center bg-cover"
-        style={{ backgroundImage: "url('/images/home.jpg')" }}
-      >
-
-        <FadeIn delay={0.15}>
-          <div id="gallery">
-            <Gallery />
-          </div>
-        </FadeIn>
-
-        <FadeIn delay={0.2}>
-          <div id="services">
-            <ServicesSection />
-          </div>
-        </FadeIn>
-
-        <FadeIn delay={0.25}>
-          <div id="products">
-            <ProductsSection />
-          </div>
-        </FadeIn>
-
-        <FadeIn delay={0.3}>
-          <div id="secondhand">
-            <SecondHandProducts />
-          </div>
-        </FadeIn>
-
-        <FadeIn delay={0.35}>
-          <div id="accessories">
-            <AccessoriesSection />
-          </div>
-        </FadeIn>
-
-        <FadeIn delay={0.4}>
-          <div id="whychooseus">
-            <WhyChooseUs />
-          </div>
-        </FadeIn>
-
-        {/* ----------------------- GOOGLE REVIEWS ADDED ----------------------- */}
-        <FadeIn delay={0.43}>
-        </FadeIn>
-
-        <FadeIn delay={0.45}>
-          <ExtraInfo />
-        </FadeIn>
-        
-        <FadeIn delay={0.45}>
-    <div
-      id="reviews"
-      className="py-10"
-      style={{
-        backgroundColor: "#1E1E1E",      // same as footer
-        color: "#F0F0F0",                // same footer text
-        borderTop: "2px solid #FF4C00",  // brand orange border
-        borderBottom: "2px solid #FF4C00"
-      }}
-    >
-      <GoogleReviews />
-    </div>
-  </FadeIn>
-
+      {/* 1. HERO SECTION */}
+      <div id="hero" className="relative z-10">
+        <HeroSection />
       </div>
 
-      {/* --------------------------- WHATSAPP BUTTON ---------------------------- */}
+      {/* 2. MAIN CONTENT - UNIFIED BLACK BACKGROUND */}
+      <div className="relative z-10 bg-[#0A0A0A]">
+        
+        {/* Persistent Technical Grid Overlay */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03]" 
+             style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '50px 50px' }}>
+        </div>
+
+        <div className="relative z-10 py-10 space-y-20">
+          
+          {/* Services */}
+          <FadeIn delay={0.1}>
+            <div id="services" className="container px-4 mx-auto">
+              <ServicesSection />
+            </div>
+          </FadeIn>
+
+          <Divider />
+
+          {/* Products */}
+          <FadeIn delay={0.2}>
+            <div id="products" className="container px-4 mx-auto">
+              <ProductsSection />
+            </div>
+          </FadeIn>
+
+          <Divider />
+
+          {/* Second Hand Products - Removed Grey Background */}
+          <FadeIn delay={0.3}>
+            <div id="secondhand" className="py-4">
+              <SecondHandProducts />
+            </div>
+          </FadeIn>
+
+          <Divider />
+
+          {/* Accessories */}
+          <FadeIn delay={0.35}>
+            <div id="accessories" className="container px-4 mx-auto">
+              <AccessoriesSection />
+            </div>
+          </FadeIn>
+
+          <Divider />
+
+          {/* Gallery */}
+          <FadeIn delay={0.4}>
+            <div id="gallery" className="container px-4 mx-auto">
+              <Gallery />
+            </div>
+          </FadeIn>
+
+          <Divider />
+
+          {/* Why Choose Us - Removed Grey Background */}
+          <FadeIn delay={0.45}>
+            <div id="whychooseus" className="py-10">
+              <div className="container px-4 mx-auto">
+                <WhyChooseUs />
+              </div>
+            </div>
+          </FadeIn>
+
+          <Divider />
+
+          {/* Extra Info */}
+          <FadeIn delay={0.5}>
+            <div className="pb-20">
+              <ExtraInfo />
+            </div>
+          </FadeIn>
+
+        </div>
+      </div>
+
+      {/* 3. FLOATING ACTIONS */}
+      
+      {/* WhatsApp */}
       <motion.a
         href="https://wa.me/919790741494?text=Hello%20Touch%20Micro%20System%20Services!"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
-        className={`fixed right-6 z-50 p-4 rounded-full bg-green-500 text-white shadow-xl hover:bg-green-600 transition-all duration-300 ${
+        className={`fixed right-6 z-50 p-4 rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_rgba(37,211,102,0.3)] hover:scale-110 transition-all duration-300 ${
           showScroll ? "bottom-24" : "bottom-6"
         }`}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4 }}
       >
         <FaWhatsapp size={24} />
       </motion.a>
 
-      {/* --------------------------- SCROLL TO TOP ---------------------------- */}
+      {/* Scroll To Top */}
       <AnimatePresence>
         {showScroll && (
           <motion.button
             onClick={scrollToTop}
-            aria-label="Scroll to top"
-            className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-[#FF4C00] text-white shadow-xl hover:bg-[#e04300] transition-all duration-300"
+            className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-[#FF4C00] text-white shadow-[0_10px_30px_rgba(255,76,0,0.3)] hover:bg-[#e04300] hover:scale-110 transition-all duration-300"
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.7 }}
-            transition={{ duration: 0.3 }}
           >
             <ArrowUp size={24} />
           </motion.button>

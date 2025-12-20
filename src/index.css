@@ -1,3 +1,61 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #0A0A0A; /* Prevents white flash on reload */
+  }
+
+  body {
+    @apply bg-[#0A0A0A] text-gray-300 font-sans antialiased overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-white;
+  }
+}
+
+/* --- CUSTOM SCROLLBAR (Tech Aesthetic) --- */
+/* Width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #171717; 
+  border-left: 1px solid #262626;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #333; 
+  border-radius: 0px; /* Sharp corners for hardware feel */
+  border: 1px solid #404040;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #FF4C00; /* Brand Orange on interaction */
+  border-color: #FF4C00;
+}
+
+/* --- TEXT SELECTION --- */
+::selection {
+  background-color: #FF4C00;
+  color: #ffffff;
+}
+
+/* --- UTILITY EXTRAS --- */
+/* Subtle grid background pattern */
+.bg-grid-pattern {
+  background-image: radial-gradient(circle, #333 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Text Glow Effect for Headings */
+.text-glow {
+  text-shadow: 0 0 20px rgba(255, 76, 0, 0.3);
+}
