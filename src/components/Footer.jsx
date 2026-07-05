@@ -15,7 +15,7 @@ export default function Footer() {
 
       <div className="relative z-10 px-6 pt-20 pb-10 mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-4 sm:grid-cols-2">
-          
+
           {/* Company Info */}
           <div className="space-y-6">
             <div className="flex items-center gap-3">
@@ -23,7 +23,7 @@ export default function Footer() {
                 <Cpu size={22} className="text-brand-orange animate-pulse" />
               </div>
               <h4 className="text-lg font-bold font-mono tracking-tight text-white uppercase">
-                Touch <span className="text-brand-orange">Micro</span> Systems
+                Touch <span className="text-brand-orange">Micro</span> Systems & Services
               </h4>
             </div>
             <p className="text-sm leading-relaxed text-gray-400 font-sans">
@@ -124,7 +124,7 @@ export default function Footer() {
         <div className="pt-8 mt-16 border-t border-white/5">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-xs font-mono text-gray-500">
-              © {new Date().getFullYear()} <span className="text-gray-300">Touch Microsystems</span>. All rights reserved.
+              © {new Date().getFullYear()} <span className="text-gray-300">Touch Micro Systems & Services </span>. All rights reserved.
             </p>
             <div className="flex items-center gap-5 text-[9px] font-mono tracking-widest text-gray-500 uppercase">
               <span>Hardware</span>

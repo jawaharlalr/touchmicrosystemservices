@@ -12,6 +12,7 @@ import ProductsSection from "../components/sections/ProductsSection";
 import AccessoriesSection from "../components/sections/AccessoriesSection";
 import SecondHandProducts from "../components/sections/SecondHandProducts";
 import Gallery from "../components/sections/gallery";
+import GoogleLiveReviews from "../components/sections/GoogleReviews";
 
 export default function Home() {
   const [showScroll, setShowScroll] = useState(false);
@@ -144,6 +145,15 @@ export default function Home() {
           <FadeIn delay={0.5}>
             <div className="pb-20">
               <ExtraInfo />
+            </div>
+          </FadeIn>
+
+          <Divider />
+
+          {/* Google Reviews */}
+          <FadeIn delay={0.55}>
+            <div className="pb-20">
+              <GoogleLiveReviews />
             </div>
           </FadeIn>
 

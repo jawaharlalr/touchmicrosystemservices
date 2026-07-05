@@ -1,19 +1,69 @@
 import React, { useState, useEffect } from "react";
-import { Star, Quote, ExternalLink, Google } from "lucide-react";
+import { Star, Quote, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const STATIC_REVIEWS = [
+  {
+    author_name: "Surya Saravanan",
+    rating: 5,
+    relative_time_description: "8 months ago",
+    text: "Best place to service your Laptop and Computer. I 100% recommend. Very much satisfied 💯💗 . I give 5 🌟🌟🌟🌟🌟 rating. Thank you Arun for your fabulous service. I am glad.",
+    profile_photo_url: ""
+  },
+  {
+    author_name: "arun arumugam",
+    rating: 5,
+    relative_time_description: "8 months ago",
+    text: "I had a good experience with Touch Micro System's service. I fully recommend and suggest considering Touch Micro for any system-related service.",
+    profile_photo_url: ""
+  },
+  {
+    author_name: "Riya Rivel",
+    rating: 5,
+    relative_time_description: "8 months ago",
+    text: "Trust 💯 office\nReadily services\nLow budget, best sales and service.",
+    profile_photo_url: ""
+  },
+  {
+    author_name: "Prabu Ganesan",
+    rating: 5,
+    relative_time_description: "8 months ago",
+    text: "They provide timely service and have a nice, professional approach",
+    profile_photo_url: ""
+  },
+  {
+    author_name: "Jeeva nandhan",
+    rating: 5,
+    relative_time_description: "8 months ago",
+    text: "Good service good approch",
+    profile_photo_url: ""
+  },
+  {
+    author_name: "Bala Mk",
+    rating: 5,
+    relative_time_description: "5 years ago",
+    text: "too good",
+    profile_photo_url: ""
+  }
+];
+
 export default function GoogleLiveReviews() {
-  const [reviews, setReviews] = useState([]);
-  const [rating, setRating] = useState(null);
-  const [count, setCount] = useState(null);
+  const [reviews, setReviews] = useState(STATIC_REVIEWS);
+  const [rating, setRating] = useState(5.0);
+  const [count, setCount] = useState(6);
   const [loading, setLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
 
-  // Load from .env
-  const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
-  const PLACE_ID = process.env.REACT_APP_GOOGLE_PLACE_ID;
+  // Load from .env with Vite fallback
+  const API_KEY = typeof process !== "undefined" ? process.env?.REACT_APP_GOOGLE_API_KEY : import.meta.env?.VITE_GOOGLE_API_KEY;
+  const PLACE_ID = (typeof process !== "undefined" ? process.env?.REACT_APP_GOOGLE_PLACE_ID : import.meta.env?.VITE_GOOGLE_PLACE_ID) || "ChIJKbGLsfhgUjoRr8wX5ngw9vA";
 
   useEffect(() => {
+    if (!API_KEY || !PLACE_ID) {
+      setLoading(false);
+      return;
+    }
+
     async function fetchReviews() {
       try {
         // Note: Using a proxy for development as Google doesn't allow direct client-side CORS for Details API
@@ -23,10 +73,10 @@ export default function GoogleLiveReviews() {
         const data = await response.json();
 
         if (data.result) {
-          setRating(data.result.rating);
-          setCount(data.result.user_ratings_total);
+          setRating(data.result.rating || 5.0);
+          setCount(data.result.user_ratings_total || 6);
 
-          if (data.result.reviews) {
+          if (data.result.reviews && data.result.reviews.length > 0) {
             const cleaned = data.result.reviews.map((rev) => ({
               ...rev,
               text: rev.text || "",
