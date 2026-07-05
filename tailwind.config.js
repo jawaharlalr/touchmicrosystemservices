@@ -20,7 +20,8 @@ module.exports = {
       },
       // 2. TECH FONTS (Ensure these are imported in your CSS or HTML)
       fontFamily: {
-        sans: ['Inter', 'Roboto', 'system-ui', 'sans-serif'],
+        sans: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['Space Grotesk', 'monospace'],
       },
       // 3. ANIMATIONS
       keyframes: {
@@ -37,12 +38,24 @@ module.exports = {
         glowPulse: {
           "0%, 100%": { boxShadow: "0 0 5px rgba(255, 76, 0, 0.2)" },
           "50%": { boxShadow: "0 0 20px rgba(255, 76, 0, 0.6)" },
+        },
+        // Scan line effect
+        scanLine: {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(100%)" }
+        },
+        // Pulse glow for text
+        textGlow: {
+          "0%, 100%": { textShadow: "0 0 8px rgba(255, 76, 0, 0.2)" },
+          "50%": { textShadow: "0 0 20px rgba(255, 76, 0, 0.7), 0 0 30px rgba(255, 76, 0, 0.4)" }
         }
       },
       animation: {
-        "scroll-loop": "scrollLoop 15s linear infinite",
+        "scroll-loop": "scrollLoop 20s linear infinite",
         "fade-in-up": "fadeInUp 0.8s ease-out forwards",
         "glow": "glowPulse 3s infinite",
+        "scan": "scanLine 3s linear infinite",
+        "text-pulse": "textGlow 2.5s infinite ease-in-out",
       },
     },
   },
