@@ -54,9 +54,8 @@ export default function GoogleLiveReviews() {
   const [loading, setLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
 
-  // Load from .env with Vite fallback
-  const API_KEY = typeof process !== "undefined" ? process.env?.REACT_APP_GOOGLE_API_KEY : import.meta.env?.VITE_GOOGLE_API_KEY;
-  const PLACE_ID = (typeof process !== "undefined" ? process.env?.REACT_APP_GOOGLE_PLACE_ID : import.meta.env?.VITE_GOOGLE_PLACE_ID) || "ChIJKbGLsfhgUjoRr8wX5ngw9vA";
+  const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+  const PLACE_ID = process.env.REACT_APP_GOOGLE_PLACE_ID || "ChIJKbGLsfhgUjoRr8wX5ngw9vA";
 
   useEffect(() => {
     if (!API_KEY || !PLACE_ID) {
@@ -112,27 +111,27 @@ export default function GoogleLiveReviews() {
       </div>
 
       <div className="relative z-10 px-6 mx-auto max-w-7xl">
-        
+
         {/* Header Section */}
         <div className="flex flex-col items-center mb-16 text-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             className="flex items-center gap-2 px-3 py-1 mb-4 border rounded-full border-brand-orange/30 bg-brand-orange/10"
           >
             <Star size={14} className="text-brand-orange fill-brand-orange" />
             <span className="text-[10px] font-black tracking-widest uppercase text-brand-orange">
-              Social Proof
+              Google Reviews
             </span>
           </motion.div>
-          
+
           <h2 className="text-4xl font-black tracking-tighter text-white uppercase md:text-5xl">
-            Client <span className="text-brand-orange">Testimonials</span>
+            Customer <span className="text-brand-orange">Feedback</span>
           </h2>
 
           {/* Rating Summary Card */}
           {rating && !loading && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               className="mt-8 flex items-center gap-6 px-8 py-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md"
@@ -140,14 +139,14 @@ export default function GoogleLiveReviews() {
               <div className="pr-6 text-left border-r border-white/10">
                 <p className="text-3xl font-black text-white">{rating}</p>
                 <div className="flex gap-1">
-                   {[...Array(5)].map((_, i) => (
+                  {[...Array(5)].map((_, i) => (
                     <Star key={i} size={14} className={i < Math.floor(rating) ? "text-yellow-400 fill-yellow-400" : "text-gray-600"} />
                   ))}
                 </div>
               </div>
               <div className="text-left">
                 <p className="text-sm font-bold tracking-widest text-white uppercase">{count} Google Reviews</p>
-                <p className="text-xs text-gray-500">Verified Technical Service</p>
+
               </div>
             </motion.div>
           )}
@@ -157,7 +156,7 @@ export default function GoogleLiveReviews() {
         {loading && (
           <div className="flex flex-col items-center py-20">
             <div className="w-12 h-12 mb-4 border-4 rounded-full border-brand-orange border-t-transparent animate-spin" />
-            <p className="font-mono text-sm tracking-widest text-gray-400">CONNECTING_TO_GOOGLE_API...</p>
+            <p className="font-mono text-sm tracking-widest text-gray-400">CONNECTING...</p>
           </div>
         )}
 
@@ -198,7 +197,7 @@ export default function GoogleLiveReviews() {
                           </div>
                         )}
                         <div className="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5">
-                           <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Logo.svg" className="w-3 h-3" alt="Google" />
+                          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Logo.svg" className="w-3 h-3" alt="Google" />
                         </div>
                       </div>
 
@@ -213,10 +212,10 @@ export default function GoogleLiveReviews() {
                     {/* Stars */}
                     <div className="flex gap-1 mb-4">
                       {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          size={14} 
-                          className={i < review.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-700"} 
+                        <Star
+                          key={i}
+                          size={14}
+                          className={i < review.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-700"}
                         />
                       ))}
                     </div>
@@ -232,9 +231,9 @@ export default function GoogleLiveReviews() {
                     {fullText.length > 150 && (
                       <button
                         onClick={() => toggleExpand(index)}
-                        className="mt-4 text-xs font-black tracking-widest text-left uppercase transition-colors text-brand-orange hover:text-orange-400"
+                        className="mt-4 text-xs font-bold tracking-wider text-left transition-colors text-brand-orange hover:text-orange-400 flex items-center gap-1"
                       >
-                        {review.expanded ? "[ SHOW_LESS ]" : "[ READ_FULL_REPORT ]"}
+                        {review.expanded ? "Show Less" : "Read More"}
                       </button>
                     )}
                   </motion.div>
@@ -255,8 +254,8 @@ export default function GoogleLiveReviews() {
                 {showAll ? "View Less" : `View All ${reviews.length} Reviews`}
               </button>
             )}
-            
-            <a 
+
+            <a
               href={`https://search.google.com/local/writereview?placeid=${PLACE_ID}`}
               target="_blank"
               rel="noreferrer"
@@ -270,7 +269,7 @@ export default function GoogleLiveReviews() {
         {/* Empty State */}
         {!loading && reviews.length === 0 && (
           <div className="py-20 border-2 border-dashed border-white/5 rounded-3xl">
-            <p className="text-gray-500 font-mono uppercase tracking-[0.3em]">No_Reviews_Found_In_Cache</p>
+            <p className="text-gray-500 font-mono uppercase tracking-[0.3em]">Reviews Not Found</p>
           </div>
         )}
       </div>
