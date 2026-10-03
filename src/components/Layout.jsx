@@ -3,12 +3,11 @@ import React from "react";
 
 /**
  * Layout: Reusable page wrapper
- * - Enforces the Brand Black background as the default.
- * - Sets default text colors and selection highlights.
+ * - Clean light theme default
  */
 export default function Layout({ children, className = "" }) {
   return (
-    <div className={`min-h-screen flex flex-col bg-brand-black text-gray-300 selection:bg-brand-orange selection:text-white ${className}`}>
+    <div className={`min-h-screen flex flex-col bg-white text-gray-900 selection:bg-orange-100 selection:text-orange-900 ${className}`}>
       {children}
     </div>
   );
@@ -16,46 +15,33 @@ export default function Layout({ children, className = "" }) {
 
 /**
  * Container: Consistent horizontal alignment
- * - Standardized responsive padding.
  */
 export const Container = ({ children, max = "max-w-7xl", className = "" }) => (
-  <div className={`w-full ${max} mx-auto px-6 sm:px-8 lg:px-10 ${className}`}>
+  <div className={`w-full ${max} mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
     {children}
   </div>
 );
 
 /**
- * Section: Vertical spacing with hardware-style dividers
- * - Uses a subtle top border to create a "modular" look.
+ * Section: Vertical spacing with clean light dividers
  */
 export const Section = ({ children, className = "", divider = false }) => (
   <section 
-    className={`py-16 sm:py-24 md:py-32 relative overflow-hidden ${divider ? "border-t border-white/5" : ""} ${className}`}
+    className={`py-16 sm:py-20 relative overflow-hidden ${divider ? "border-t border-gray-300" : ""} ${className}`}
   >
     {children}
   </section>
 );
 
 /**
- * TechBackground: A utility to add the "Micro System" grid look
+ * TechBackground: Subtle light technical grid pattern
  */
 export const TechBackground = () => (
-  <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-    {/* Subtle Grid Lines */}
-    <div 
-      className="absolute inset-0 opacity-[0.03]" 
-      style={{ 
-        backgroundImage: 'linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)', 
-        backgroundSize: '40px 40px' 
-      }} 
-    />
-    {/* Radial Fade to keep the grid subtle in the center */}
-    <div className="absolute inset-0 bg-gradient-to-b from-brand-black via-transparent to-brand-black" />
-  </div>
+  <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-60 bg-grid-tech" />
 );
 
 /**
- * Glow: A decorative accent to highlight tech hardware imagery
+ * Glow: Subtle warm highlight accent for light backgrounds
  */
 export const Glow = ({ color = "orange", position = "top-right" }) => {
   const positions = {
@@ -66,9 +52,9 @@ export const Glow = ({ color = "orange", position = "top-right" }) => {
 
   return (
     <div 
-      className={`absolute w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none opacity-10 
+      className={`absolute w-[450px] h-[450px] rounded-full blur-[100px] pointer-events-none opacity-30 
       ${positions[position]} 
-      ${color === "orange" ? "bg-brand-orange" : "bg-blue-500"}`} 
+      ${color === "orange" ? "bg-orange-100" : "bg-blue-100"}`} 
     />
   );
 };

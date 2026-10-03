@@ -5,108 +5,77 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #0A0A0A; /* Prevents white flash on reload */
+    background-color: #FFFFFF;
   }
 
   body {
-    @apply bg-[#0A0A0A] text-gray-300 font-sans antialiased overflow-x-hidden;
+    @apply bg-white text-gray-900 font-sans antialiased overflow-x-hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight text-white font-sans;
+    @apply font-bold tracking-tight text-gray-900 font-sans;
   }
 }
 
-/* --- CUSTOM SCROLLBAR (Futuristic Cyber Aesthetic) --- */
+/* --- CUSTOM LIGHT SCROLLBAR --- */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0D0D0D; 
-  border-left: 1px solid #1E1E1E;
+  background: #F8FAFC;
+  border-left: 1px solid #E2E8F0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #222222; 
-  border: 1px solid #333333;
-  transition: all 0.3s ease;
+  background: #CBD5E1;
+  border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF4C00; 
-  border-color: #FF4C00;
-  box-shadow: 0 0 10px rgba(255, 76, 0, 0.5);
+  background: #F97316;
 }
 
 /* --- TEXT SELECTION --- */
 ::selection {
-  background-color: #FF4C00;
-  color: #ffffff;
+  background-color: #FED7AA;
+  color: #9A3412;
 }
 
-/* --- UTILITY EXTRAS --- */
-/* Rich dynamic tech-grid background pattern */
-.bg-grid-pattern {
-  background-image: radial-gradient(circle, rgba(255, 76, 0, 0.15) 1px, transparent 1px);
+/* --- LIGHT THEME UTILITY PATTERNS --- */
+
+/* Subtle light technical dot grid */
+.bg-grid-tech {
+  background-image: radial-gradient(#E2E8F0 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+
+/* Subtle light technical square grid */
+.bg-grid-subtle {
+  background-image: linear-gradient(to right, rgba(226, 232, 240, 0.6) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(226, 232, 240, 0.6) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
-/* High-fidelity dense dot grid */
-.bg-grid-tech {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                    radial-gradient(rgba(255, 76, 0, 0.05) 1px, transparent 1px);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
+/* Subtle warm highlight grid for specific technical focus */
+.bg-grid-warm {
+  background-image: radial-gradient(rgba(249, 115, 22, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-/* Glassmorphism premium panels */
-.glass-panel {
-  background: rgba(23, 23, 23, 0.6);
-  backdrop-filter: blur(16px) saturate(120%);
-  -webkit-backdrop-filter: blur(16px) saturate(120%);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+/* Modern Light Card Base */
+.light-card {
+  background-color: #FFFFFF;
+  border: 1px solid #D1D5DB;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glass-panel:hover {
-  border-color: rgba(255, 76, 0, 0.25);
-  box-shadow: 0 0 30px rgba(255, 76, 0, 0.05);
-}
-
-/* Text Glow Effect for Headings */
-.text-glow {
-  text-shadow: 0 0 20px rgba(255, 76, 0, 0.4);
-}
-
-/* Cybernetic Corner Brackets */
-.corner-brackets::before,
-.corner-brackets::after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-color: rgba(255, 76, 0, 0.4);
-  border-style: solid;
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
-
-.corner-brackets::before {
-  top: 0;
-  left: 0;
-  border-width: 1px 0 0 1px;
-}
-
-.corner-brackets::after {
-  bottom: 0;
-  right: 0;
-  border-width: 0 1px 1px 0;
-}
-
-.corner-brackets:hover::before,
-.corner-brackets:hover::after {
-  width: 16px;
-  height: 16px;
-  border-color: #FF4C00;
+.light-card:hover {
+  border-color: #FDBA74;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+  transform: translateY(-2px);
 }

@@ -1,17 +1,48 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, Tag } from "lucide-react";
+import { ShoppingBag, Tag, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function ProductsSection() {
   const [activeTab, setActiveTab] = useState("All");
 
   const products = [
-    { name: "Laptop", category: "Computers", img: "/images/laptop_product.png" },
-    { name: "Desktop", category: "Computers", img: "/images/desktop_product.png" },
-    { name: "Server", category: "Networking", img: "/images/server_product.png" },
-    { name: "Printer", category: "Office Equipment", img: "/images/printer_product.png" },
-    { name: "CCTV", category: "Security", img: "/images/camera_product.png" },
-    { name: "Monitor", category: "Peripherals", img: "/images/monitor_product.png" },
+    { 
+      name: "Business & Gaming Laptops", 
+      category: "Computers", 
+      spec: "Latest generation Core & Ryzen processors, SSD storage, high-resolution IPS displays.",
+      img: "/images/laptop_product.png" 
+    },
+    { 
+      name: "Custom Workstation Desktops", 
+      category: "Computers", 
+      spec: "Tailored configurations for software development, CAD rendering, and business computing.",
+      img: "/images/desktop_product.png" 
+    },
+    { 
+      name: "Enterprise Rack & Tower Servers", 
+      category: "Networking", 
+      spec: "High-uptime hardware, redundant power supplies, multi-core architecture for centralized data.",
+      img: "/images/server_product.png" 
+    },
+    { 
+      name: "Commercial Office Printers", 
+      category: "Office Equipment", 
+      spec: "High-speed laser and multi-function ink-tank printers with duplex scanning and networking.",
+      img: "/images/printer_product.png" 
+    },
+    { 
+      name: "Surveillance & IP CCTV Systems", 
+      category: "Security", 
+      spec: "High-definition night vision IP cameras, multi-channel NVR arrays, and mobile monitoring.",
+      img: "/images/camera_product.png" 
+    },
+    { 
+      name: "Professional Monitors & Displays", 
+      category: "Peripherals", 
+      spec: "IPS color-calibrated displays, ergonomic stands, ultra-wide and dual-monitor configurations.",
+      img: "/images/monitor_product.png" 
+    },
   ];
 
   const categories = ["All", "Computers", "Networking & Security", "Peripherals & Office"];
@@ -31,40 +62,45 @@ export default function ProductsSection() {
   const placeholder = "/images/placeholder.webp";
 
   return (
-    <section id="products" className="relative py-24 overflow-hidden bg-brand-black bg-grid-tech border-t border-white/5">
-      {/* Decorative Grid and Blur */}
-      <div className="absolute right-0 top-1/3 w-80 h-80 bg-brand-orange/5 blur-[120px] pointer-events-none rounded-full" />
-
-      <div className="relative z-10 px-6 mx-auto max-w-7xl">
+    <section id="products" className="relative py-20 bg-slate-50 border-t border-gray-300">
+      <div className="relative z-10 px-4 sm:px-6 mx-auto max-w-7xl">
+        
         {/* Section Header */}
-        <div className="flex flex-col items-center justify-between gap-4 mb-12 md:flex-row md:items-end">
-          <div className="text-center md:text-left">
-            <div className="flex items-center justify-center gap-2 mb-4 md:justify-start">
-              <ShoppingBag size={16} className="text-brand-orange" />
-              <span className="text-[10px] font-mono tracking-widest uppercase text-gray-500">
+        <div className="flex flex-col items-start justify-between gap-4 mb-12 md:flex-row md:items-end">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 mb-3.5 border rounded-full border-orange-200 bg-orange-50">
+              <ShoppingBag size={14} className="text-orange-600" />
+              <span className="text-xs font-semibold tracking-wide text-orange-800 uppercase">
                 Hardware Inventory
               </span>
             </div>
-            <h2 className="text-3xl font-black tracking-tighter text-white uppercase md:text-5xl">
-              Our <span className="text-brand-orange">Products</span>
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              Commercial &amp; Enterprise <span className="text-orange-600">Products</span>
             </h2>
+            <p className="max-w-2xl mt-3 text-base text-gray-600">
+              Quality-tested enterprise hardware, corporate computing devices, and precision office systems.
+            </p>
           </div>
-          <div className="flex-grow hidden h-[1px] mx-8 bg-white/5 md:block" />
-          <p className="text-sm font-mono text-gray-500 max-w-[220px] text-center md:text-right">
-            [CLASS_A EQUIPMENT FOR ENTERPRISE & CONSUMER APPLICATIONS]
-          </p>
+
+          <Link
+            to="/contact-us"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-orange-600 hover:text-orange-700"
+          >
+            <span>Request Bulk Quotation</span>
+            <ArrowRight size={15} />
+          </Link>
         </div>
 
-        {/* Categories Tab Selector - PREMIUM UX */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12 md:justify-start">
+        {/* Categories Tab Selector */}
+        <div className="flex flex-wrap gap-2.5 mb-10">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveTab(cat)}
-              className={`px-5 py-2 text-xs font-mono font-bold tracking-widest uppercase border transition-all duration-300 rounded-full ${
+              className={`px-4 py-2 text-xs font-semibold tracking-wide uppercase transition-all duration-200 rounded-lg ${
                 activeTab === cat
-                  ? "text-white bg-brand-orange border-brand-orange/50 shadow-[0_0_15px_rgba(255,76,0,0.35)]"
-                  : "text-gray-400 border-white/5 bg-white/[0.01] hover:text-white hover:border-white/10"
+                  ? "bg-orange-500 text-white shadow-xs"
+                  : "bg-white text-gray-700 border border-gray-300 hover:border-orange-400 hover:text-orange-600"
               }`}
             >
               {cat}
@@ -73,61 +109,65 @@ export default function ProductsSection() {
         </div>
 
         {/* Product Grid */}
-        <motion.ul 
+        <motion.div 
           layout
-          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           <AnimatePresence mode="popLayout">
-            {filteredProducts.map((product, idx) => (
-              <motion.li 
+            {filteredProducts.map((product) => (
+              <motion.div 
                 key={product.name}
                 layout
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4 }}
-                className="flex flex-col group relative p-6 border rounded-2xl bg-white/[0.01] border-white/5 hover:border-brand-orange/30 hover:bg-white/[0.02] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-300"
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.3 }}
+                className="flex flex-col overflow-hidden transition-all duration-300 bg-white border border-gray-300 rounded-2xl shadow-xs hover:shadow-lg hover:border-orange-400 group"
               >
-                {/* Image Container */}
-                <div className="relative w-full h-48 overflow-hidden rounded-xl bg-black/40 border border-white/5 flex items-center justify-center sm:h-56">
-                  
-                  {/* Product Image */}
+                {/* Image Container with Light Background */}
+                <div className="relative w-full h-52 overflow-hidden bg-slate-50/80 border-b border-gray-200 flex items-center justify-center p-6">
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="object-contain w-full h-full p-6 transition-transform duration-500 group-hover:scale-105 grayscale-[0.2] group-hover:grayscale-0"
+                    className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105"
                     onError={(e) => (e.currentTarget.src = placeholder)}
                     loading="lazy"
                   />
-
-                  {/* Cyber Corner brackets inside card */}
-                  <div className="absolute top-2 left-2 w-3.5 h-3.5 border-t border-l border-white/10 group-hover:border-brand-orange transition-colors" />
-                  <div className="absolute bottom-2 right-2 w-3.5 h-3.5 border-b border-r border-white/10 group-hover:border-brand-orange transition-colors" />
-                </div>
-
-                {/* Product Info Area */}
-                <div className="flex flex-col items-center mt-5 text-center">
-                  <span className="text-lg font-bold tracking-tight text-white transition-colors group-hover:text-brand-orange font-mono">
-                    {product.name}
-                  </span>
-
-                  {/* Modern Category Tag */}
-                  <div className="flex items-center gap-1.5 mt-2 bg-white/[0.03] border border-white/5 px-2.5 py-0.5 rounded-full">
-                    <Tag size={10} className="text-brand-orange" />
-                    <span className="text-[9px] font-mono tracking-widest uppercase text-gray-400">
+                  <div className="absolute top-3.5 left-3.5">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[11px] font-medium text-gray-700 bg-white border border-gray-300 rounded-full shadow-xs">
+                      <Tag size={10} className="text-orange-600" />
                       {product.category}
                     </span>
                   </div>
-
-                  {/* Inquiry Button */}
-                  <button className="mt-4 text-[10px] font-mono tracking-widest uppercase text-white/40 border-b border-white/5 pb-0.5 opacity-50 group-hover:opacity-100 transition-all hover:text-brand-orange hover:border-brand-orange">
-                    Inquire Now
-                  </button>
                 </div>
-              </motion.li>
+
+                {/* Product Info */}
+                <div className="flex flex-col flex-1 p-6">
+                  <h3 className="mb-2 text-lg font-bold text-gray-900 group-hover:text-orange-600 transition-colors">
+                    {product.name}
+                  </h3>
+                  <p className="flex-1 text-sm leading-relaxed text-gray-600 mb-5">
+                    {product.spec}
+                  </p>
+
+                  <div className="pt-4 border-t border-gray-200 flex items-center justify-between">
+                    <span className="text-xs font-medium text-emerald-700">Official Warranty</span>
+                    <a
+                      href={`https://wa.me/919790741494?text=Hello%20Touch%20Micro%20Systems!%20I%20would%20like%20to%20get%20a%20quote%20for:%20${encodeURIComponent(product.name)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-lg shadow-xs transition-colors"
+                    >
+                      <span>Get Quote</span>
+                      <ArrowRight size={13} />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </AnimatePresence>
-        </motion.ul>
+        </motion.div>
+
       </div>
     </section>
   );

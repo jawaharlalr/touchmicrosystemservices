@@ -1,37 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronRight, Cpu, Terminal, Radio, Shield } from "lucide-react";
+import { ArrowRight, Cpu, CheckCircle2, ChevronRight } from "lucide-react";
 
 export default function HeroSection() {
-  const [logs, setLogs] = useState([
-    "SYS_INIT: Booting Touch Micro diagnostics...",
-    "VOLT_CHECK: Core voltage stable at 1.22V",
-    "MEM_CHECK: DDR5 buffer allocations verified"
-  ]);
-
-  const [hz, setHz] = useState(4.2);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Simulate live processor frequencies
-      setHz((4.0 + Math.random() * 0.5).toFixed(2));
-      
-      // Simulate ticking system log entries
-      const events = [
-        "CHIP_TEMP: Sensor 01 reading 38.5°C",
-        "OSCILLOSCOPE: Clock signal phase aligned",
-        "PORT_SCAN: I2C & SPI interfaces active",
-        "SYS_LOAD: Operating at 22% capacity",
-        "REFURB_CHECK: Component diagnostics idle",
-        "NET_ROUTING: High-priority queue stable"
-      ];
-      const randomEvent = events[Math.floor(Math.random() * events.length)];
-      setLogs((prev) => [randomEvent, prev[0], prev[1]]);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   const brands = [
     { name: "Dell", src: "/images/dell.webp" },
     { name: "HP", src: "/images/hp.webp" },
@@ -43,188 +15,131 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen px-6 pt-32 pb-20 overflow-hidden bg-brand-black bg-grid-tech">
+    <section className="relative flex flex-col items-center justify-center pt-4 sm:pt-8 pb-16 overflow-hidden bg-white">
       
-      {/* --- TECH BACKGROUND GLOWS --- */}
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.08, 1],
-          opacity: [0.05, 0.08, 0.05] 
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 left-1/4 w-[750px] h-[350px] bg-brand-orange rounded-full blur-[140px] pointer-events-none z-0" 
-      />
+      {/* Light subtle background grid */}
+      <div className="absolute inset-0 pointer-events-none opacity-60 bg-grid-tech" />
+      
+      {/* Soft warm highlight aura */}
+      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-orange-100/40 rounded-full blur-[110px] pointer-events-none" />
 
-      <div className="relative z-10 w-full mx-auto max-w-7xl">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+      <div className="relative z-10 w-full px-4 sm:px-6 mx-auto max-w-7xl">
+        
+        {/* CENTERED HERO CONTENT */}
+        <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
           
-          {/* LEFT COLUMN: HERO CONTENT */}
-          <div className="text-left lg:col-span-7">
-            {/* Animated Badge */}
-            <motion.div 
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 border rounded-full border-brand-orange/30 bg-brand-orange/5 backdrop-blur-md"
-            >
-              <Cpu size={14} className="text-brand-orange animate-pulse" />
-              <span className="text-[10px] font-mono tracking-[0.25em] font-bold text-brand-orange uppercase">
-                Chennai's Tech Support Specialists
-              </span>
-            </motion.div>
-
-            {/* Heading */}
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.7 }}
-              className="mb-6 text-4xl font-black leading-[1.0] tracking-tighter text-white sm:text-6xl lg:text-7xl uppercase"
-            >
-              SYSTEMS BUILT <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange via-orange-400 to-brand-orange drop-shadow-[0_0_20px_rgba(255,76,0,0.2)]">
-                FOR PERFORMANCE
-              </span>
-            </motion.h1>
-
-            {/* Subtitle */}
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="max-w-2xl mb-10 text-sm leading-relaxed text-gray-400 sm:text-base md:text-lg font-sans"
-            >
-              Premium electronics repair, embedded solutions, and system architecture. 
-              Expert diagnostics and component-level servicing for all leading brands.
-            </motion.p>
-
-            {/* Heavy CTAs */}
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex flex-col gap-4 sm:flex-row"
-            >
-              <a
-                href="/contact-us"
-                className="group flex items-center justify-center gap-3 px-8 py-4.5 text-xs font-mono tracking-widest font-bold text-white transition-all bg-brand-orange border border-brand-orange/40 hover:bg-orange-600 shadow-[0_0_25px_rgba(255,76,0,0.25)] hover:shadow-[0_0_40px_rgba(255,76,0,0.4)] active:scale-95 rounded-sm"
-              >
-                BOOK A SERVICE
-                <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </a>
-              <button 
-                onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4.5 text-xs font-mono tracking-widest font-bold text-white transition-all border rounded-sm border-white/10 bg-white/[0.01] hover:bg-white/5 active:scale-95"
-              >
-                EXPLORE SOLUTIONS
-              </button>
-            </motion.div>
-          </div>
-
-          {/* RIGHT COLUMN: INTERACTIVE HUD DIAGNOSTICS */}
+          {/* Trust Badge */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="lg:col-span-5 relative w-full lg:max-w-md mx-auto"
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 border rounded-full border-orange-300 bg-orange-50/90 shadow-xs"
           >
-            {/* Tech Outer Shield Frame */}
-            <div className="relative p-6 border rounded-2xl bg-black/60 border-white/5 shadow-2xl backdrop-blur-xl corner-brackets">
-              
-              {/* Header bar */}
-              <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/5">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_#22c55e]" />
-                  <span className="text-[10px] font-mono tracking-widest text-gray-400 font-bold uppercase">
-                    SYS_DIAGNOSTICS
-                  </span>
-                </div>
-                <div className="flex items-center gap-1.5 text-[8px] font-mono text-gray-500">
-                  <Terminal size={10} />
-                  <span>MOD_v1.0</span>
-                </div>
-              </div>
+            <Cpu size={15} className="text-orange-600" />
+            <span className="text-xs font-semibold tracking-wide text-orange-800 uppercase">
+              Chennai's Embedded &amp; Electronics Specialists
+            </span>
+          </motion.div>
 
-              {/* Status statistics grid */}
-              <div className="grid grid-cols-2 gap-4 mb-6">
-                
-                {/* Stat block 1 */}
-                <div className="p-3 border rounded-xl bg-white/[0.01] border-white/5">
-                  <span className="block text-[8px] font-mono text-gray-500 uppercase tracking-wider mb-1">
-                    CPU_FREQUENCY
-                  </span>
-                  <span className="text-xl font-bold font-mono text-white">
-                    {hz} <span className="text-[10px] text-brand-orange">GHz</span>
-                  </span>
-                </div>
+          {/* Main Heading */}
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
+            className="mb-6 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl leading-[1.15]"
+          >
+            Embedded Systems &amp; Electronics Solutions{" "}
+            <span className="text-orange-600">Built for Performance</span>
+          </motion.h1>
 
-                {/* Stat block 2 */}
-                <div className="p-3 border rounded-xl bg-white/[0.01] border-white/5">
-                  <span className="block text-[8px] font-mono text-gray-500 uppercase tracking-wider mb-1">
-                    VOLT_STATUS
-                  </span>
-                  <span className="text-xl font-bold font-mono text-white">
-                    1.22 <span className="text-[10px] text-green-400">V</span>
-                  </span>
-                </div>
+          {/* Supporting Text */}
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="max-w-2xl mb-8 text-base leading-relaxed text-gray-600 sm:text-lg"
+          >
+            Embedded systems, electronics, computer solutions and technical services tailored for businesses, institutions and individuals.
+          </motion.p>
 
-                {/* Stat block 3 */}
-                <div className="p-3 border rounded-xl bg-white/[0.01] border-white/5">
-                  <span className="block text-[8px] font-mono text-gray-500 uppercase tracking-wider mb-1">
-                    SYS_STABILITY
-                  </span>
-                  <div className="flex items-center gap-1">
-                    <Shield size={12} className="text-brand-orange" />
-                    <span className="text-xs font-bold font-mono text-white">99.98%</span>
-                  </div>
-                </div>
-
-                {/* Stat block 4 */}
-                <div className="p-3 border rounded-xl bg-white/[0.01] border-white/5">
-                  <span className="block text-[8px] font-mono text-gray-500 uppercase tracking-wider mb-1">
-                    LINK_BANDWIDTH
-                  </span>
-                  <div className="flex items-center gap-1">
-                    <Radio size={12} className="text-green-400" />
-                    <span className="text-xs font-bold font-mono text-white">1000 Mbps</span>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Ticking log console */}
-              <div className="p-4 border rounded-xl bg-black border-white/5 font-mono text-[9px] text-gray-400 h-28 overflow-hidden space-y-1.5 flex flex-col justify-end">
-                {logs.map((log, idx) => (
-                  <div key={idx} className="flex gap-2 transition-all duration-300">
-                    <span className="text-brand-orange select-none">&gt;&gt;</span>
-                    <span className="truncate leading-none">{log}</span>
-                  </div>
-                ))}
-              </div>
+          {/* Key Value Bullets / Badges */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.25, duration: 0.6 }}
+            className="flex flex-wrap justify-center gap-2.5 sm:gap-3 mb-10 max-w-3xl text-xs sm:text-sm font-medium text-gray-700"
+          >
+            <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-50 border border-gray-300 rounded-full shadow-xs">
+              <CheckCircle2 size={16} className="text-orange-600 flex-shrink-0" />
+              <span>Component-Level Diagnostics</span>
+            </div>
+            <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-50 border border-gray-300 rounded-full shadow-xs">
+              <CheckCircle2 size={16} className="text-orange-600 flex-shrink-0" />
+              <span>Custom Hardware &amp; IoT</span>
+            </div>
+            <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-50 border border-gray-300 rounded-full shadow-xs">
+              <CheckCircle2 size={16} className="text-orange-600 flex-shrink-0" />
+              <span>Multi-Brand Enterprise Support</span>
+            </div>
+            <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-50 border border-gray-300 rounded-full shadow-xs">
+              <CheckCircle2 size={16} className="text-orange-600 flex-shrink-0" />
+              <span>Certified Lab Warranty</span>
             </div>
           </motion.div>
 
+          {/* Action Buttons */}
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="flex flex-col gap-4 sm:flex-row justify-center w-full sm:w-auto"
+          >
+            <Link
+              to="/contact-us"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 text-sm font-semibold text-white transition-all rounded-xl bg-orange-500 hover:bg-orange-600 shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 active:scale-98"
+            >
+              <span>Get a Quote</span>
+              <ArrowRight size={16} />
+            </Link>
+            <button 
+              onClick={() => {
+                const element = document.getElementById('services');
+                element?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold text-gray-800 transition-all bg-white border border-gray-300 rounded-xl hover:bg-gray-50 hover:border-orange-400 active:scale-98 shadow-xs"
+            >
+              <span>Explore Services</span>
+              <ChevronRight size={16} className="text-gray-400" />
+            </button>
+          </motion.div>
         </div>
 
-        {/* --- BRAND CAROUSEL (FLOATING METALLIC TILES) --- */}
-        <div className="mt-32">
-          <p className="mb-10 text-[10px] font-mono tracking-[0.4em] text-gray-500 uppercase">
-            Authorized Service Expertise
-          </p>
+        {/* --- BRAND CAROUSEL (PROMINENT, BIGGER LOGOS WITH VISIBLE BORDERS) --- */}
+        <div className="mt-20 pt-10 border-t border-gray-300">
+          <div className="flex flex-col items-center mb-8 text-center">
+            <span className="text-xs font-bold tracking-widest text-orange-600 uppercase mb-1">
+              Authorized Service Expertise
+            </span>
+            <h3 className="text-base sm:text-lg font-bold text-gray-800">
+              Component-Level Servicing Across Leading Hardware Brands
+            </h3>
+          </div>
           
-          <div className="relative w-full overflow-hidden group">
-            {/* Gradients on edges for fade-out look */}
-            <div className="absolute top-0 left-0 z-20 w-32 h-full pointer-events-none bg-gradient-to-r from-brand-black to-transparent" />
-            <div className="absolute top-0 right-0 z-20 w-32 h-full pointer-events-none bg-gradient-to-l from-brand-black to-transparent" />
+          <div className="relative w-full overflow-hidden group py-2">
+            {/* Smooth Edge Fade Masks */}
+            <div className="absolute top-0 left-0 z-20 w-28 sm:w-44 h-full pointer-events-none bg-gradient-to-r from-white via-white/80 to-transparent" />
+            <div className="absolute top-0 right-0 z-20 w-28 sm:w-44 h-full pointer-events-none bg-gradient-to-l from-white via-white/80 to-transparent" />
 
-            <div className="flex gap-8 py-8 whitespace-nowrap animate-scroll-loop hover:[animation-play-state:paused]">
+            <div className="flex gap-6 sm:gap-8 py-4 whitespace-nowrap animate-scroll-loop hover:[animation-play-state:paused]">
               {[...brands, ...brands].map((brand, index) => (
                 <div
                   key={index}
-                  className="inline-flex items-center justify-center w-52 h-28 p-8 transition-all duration-300 border rounded-2xl bg-white/[0.01] border-white/5 backdrop-blur-md hover:scale-110 hover:bg-white/[0.04] hover:border-brand-orange/40 hover:shadow-[0_0_30px_rgba(255,76,0,0.2)] group/item"
+                  className="flex-shrink-0 shrink-0 inline-flex items-center justify-center w-64 sm:w-72 h-32 sm:h-36 px-7 py-5 transition-all duration-300 border rounded-2xl bg-white border-gray-300 shadow-xs hover:shadow-xl hover:border-orange-400 hover:-translate-y-1"
                 >
                   <img
                     src={brand.src}
                     alt={brand.name}
-                    className="object-contain w-full h-full transition-all duration-300 filter brightness-90 group-hover/item:brightness-110 opacity-70 group-hover/item:opacity-100"
+                    className="object-contain h-20 sm:h-24 w-auto max-w-[190px] transition-transform duration-300 hover:scale-105"
                     loading="lazy"
                   />
                 </div>
@@ -232,18 +147,8 @@ export default function HeroSection() {
             </div>
           </div>
         </div>
-      </div>
 
-      <style jsx="true">{`
-        @keyframes scrollLoop {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-scroll-loop {
-          display: inline-flex;
-          animation: scrollLoop 25s linear infinite;
-        }
-      `}</style>
+      </div>
     </section>
   );
 }

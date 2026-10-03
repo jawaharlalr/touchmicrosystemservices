@@ -4,58 +4,47 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/**/*.{js,ts,jsx,tsx,mdx}", // Enabled src by default as most React apps use it
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      // 1. DEFINING YOUR BRAND PALETTE
       colors: {
         brand: {
-          black: "#0A0A0A",    // The deep background color
-          dark: "#171717",     // Card / Section background
-          border: "#262626",   // Subtle borders
-          orange: "#FF4C00",   // Your Main Accent Color
-          text: "#A3A3A3",     // Standard readable gray text
+          orange: "#F97316",       // Primary brand accent
+          orangeHover: "#EA580C",  // Darker orange for hover states
+          orangeLight: "#FFF7ED",  // Very light orange tint for CTA section
+          orangeMuted: "#FED7AA",  // Soft border / badge highlight
+          dark: "#111827",         // Primary dark navy/charcoal text
+          muted: "#4B5563",        // Secondary descriptive text
+          border: "#E5E7EB",       // Crisp subtle light-gray borders
+          bg: "#FFFFFF",           // Primary white background
+          light: "#F8FAFC",        // Light neutral alternating section background
+          black: "#FFFFFF",        // Safe fallback: maps to clean white
+          text: "#4B5563",         // Standard readable gray text
         },
       },
-      // 2. TECH FONTS (Ensure these are imported in your CSS or HTML)
       fontFamily: {
         sans: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['Space Grotesk', 'monospace'],
       },
-      // 3. ANIMATIONS
+      boxShadow: {
+        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
+        'card-hover': '0 12px 24px -4px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.03)',
+        'subtle-orange': '0 4px 14px 0 rgba(249, 115, 22, 0.22)',
+      },
       keyframes: {
         scrollLoop: {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
-        // A smooth fade-in for sections
         fadeInUp: {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "0%": { opacity: "0", transform: "translateY(16px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        // A "breathing" glow for status lights or buttons
-        glowPulse: {
-          "0%, 100%": { boxShadow: "0 0 5px rgba(255, 76, 0, 0.2)" },
-          "50%": { boxShadow: "0 0 20px rgba(255, 76, 0, 0.6)" },
-        },
-        // Scan line effect
-        scanLine: {
-          "0%": { transform: "translateY(-100%)" },
-          "100%": { transform: "translateY(100%)" }
-        },
-        // Pulse glow for text
-        textGlow: {
-          "0%, 100%": { textShadow: "0 0 8px rgba(255, 76, 0, 0.2)" },
-          "50%": { textShadow: "0 0 20px rgba(255, 76, 0, 0.7), 0 0 30px rgba(255, 76, 0, 0.4)" }
-        }
       },
       animation: {
-        "scroll-loop": "scrollLoop 20s linear infinite",
-        "fade-in-up": "fadeInUp 0.8s ease-out forwards",
-        "glow": "glowPulse 3s infinite",
-        "scan": "scanLine 3s linear infinite",
-        "text-pulse": "textGlow 2.5s infinite ease-in-out",
+        "scroll-loop": "scrollLoop 12s linear infinite",
+        "fade-in-up": "fadeInUp 0.6s ease-out forwards",
       },
     },
   },

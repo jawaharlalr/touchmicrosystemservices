@@ -1,38 +1,90 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Wrench, Monitor, Shield, Database, Cpu, Printer, Camera } from "lucide-react";
+import { Wrench, Monitor, Shield, Database, Cpu, Printer, Camera, CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function ServicesSection() {
   const services = [
-    { name: "Laptop Chip Level Service", img: "/images/lcls_service.png", icon: <Cpu className="w-5 h-5" />, size: "lg:col-span-2" },
-    { name: "Desktop Chip Level Service", img: "/images/lcls_service.png", icon: <Monitor className="w-5 h-5" />, size: "lg:col-span-1" },
-    { name: "Printer Service", img: "/images/ps_service.png", icon: <Printer className="w-5 h-5" />, size: "lg:col-span-1" },
-    { name: "CCTV Service", img: "/images/cctvs_service.png", icon: <Camera className="w-5 h-5" />, size: "lg:col-span-1" },
-    { name: "Data Recovery Service", img: "/images/drs_service.png", icon: <Database className="w-5 h-5" />, size: "lg:col-span-1" },
-    { name: "Laptop Upgrade Service", img: "/images/lus_service.png", icon: <Wrench className="w-5 h-5" />, size: "lg:col-span-1" },
-    { name: "Desktop Upgrade Service", img: "/images/lus_service.png", icon: <Shield className="w-5 h-5" />, size: "lg:col-span-1" },
+    { 
+      name: "Laptop Chip Level Service", 
+      desc: "Component-level micro-soldering, motherboard tracing, GPU rework, and power delivery IC repair.",
+      img: "/images/lcls_service.png", 
+      icon: <Cpu className="w-5 h-5" />, 
+      size: "lg:col-span-2" 
+    },
+    { 
+      name: "Desktop Chip Level Service", 
+      desc: "Diagnostics and servicing for motherboard VRMs, PCIe traces, BIOS recovery, and component replacements.",
+      img: "/images/desktop_product.png", 
+      icon: <Monitor className="w-5 h-5" />, 
+      size: "lg:col-span-1" 
+    },
+    { 
+      name: "Printer Service", 
+      desc: "LaserJet and ink-tank maintenance, roller mechanism overhaul, logic board repairs, and toner setup.",
+      img: "/images/ps_service.png", 
+      icon: <Printer className="w-5 h-5" />, 
+      size: "lg:col-span-1" 
+    },
+    { 
+      name: "CCTV & Security Solutions", 
+      desc: "IP camera installations, NVR/DVR configuration, remote surveillance networking, and maintenance.",
+      img: "/images/cctvs_service.png", 
+      icon: <Camera className="w-5 h-5" />, 
+      size: "lg:col-span-1" 
+    },
+    { 
+      name: "Data Recovery Service", 
+      desc: "Specialized recovery for damaged HDDs, formatted SSDs, firmware corruptions, and flash media.",
+      img: "/images/drs_service.png", 
+      icon: <Database className="w-5 h-5" />, 
+      size: "lg:col-span-1" 
+    },
+    { 
+      name: "Laptop Upgrade Service", 
+      desc: "High-speed NVMe SSD installations, RAM expansions, battery replacements, and thermal repasting.",
+      img: "/images/lus_service.png", 
+      icon: <Wrench className="w-5 h-5" />, 
+      size: "lg:col-span-1" 
+    },
+    { 
+      name: "Desktop & Server Tuning", 
+      desc: "Enterprise OS configuration, PSU upgrades, workstation cooling optimization, and hardware hardening.",
+      img: "/images/server_product.png", 
+      icon: <Shield className="w-5 h-5" />, 
+      size: "lg:col-span-2" 
+    },
   ];
 
   const placeholder = "/images/placeholder.webp";
 
   return (
-    <section id="services" className="relative py-24 overflow-hidden bg-brand-black bg-grid-tech border-t border-white/5">
-      {/* Decorative Glow */}
-      <div className="absolute top-0 left-0 w-80 h-80 bg-brand-orange/5 blur-[120px] pointer-events-none rounded-full" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-orange-500/[0.02] blur-[120px] pointer-events-none rounded-full" />
-
-      <div className="relative z-10 px-6 mx-auto max-w-7xl">
+    <section id="services" className="relative py-20 bg-white">
+      <div className="relative z-10 px-4 sm:px-6 mx-auto max-w-7xl">
+        
         {/* Section Header */}
-        <div className="mb-16 text-left">
-          <div className="inline-block px-3 py-1 mb-4 border rounded-full border-brand-orange/20 bg-brand-orange/5">
-            <span className="text-[10px] font-mono tracking-widest font-bold uppercase text-brand-orange">
-              Technical Capabilities
-            </span>
+        <div className="flex flex-col items-start justify-between gap-4 mb-14 md:flex-row md:items-end">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 mb-3.5 border rounded-full border-orange-200 bg-orange-50">
+              <Wrench size={14} className="text-orange-600" />
+              <span className="text-xs font-semibold tracking-wide text-orange-800 uppercase">
+                Expert Technical Services
+              </span>
+            </div>
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              Professional <span className="text-orange-600">Electronics &amp; Hardware</span> Services
+            </h2>
+            <p className="max-w-2xl mt-3 text-base text-gray-600">
+              Lab-certified diagnostics, precision chip-level repairs, and hardware servicing conducted by experienced engineers.
+            </p>
           </div>
-          <h2 className="text-3xl font-black tracking-tighter text-white uppercase sm:text-4xl md:text-5xl">
-            Our <span className="text-brand-orange">Services</span>
-          </h2>
-          <div className="w-16 h-1 mt-4 bg-brand-orange rounded-full shadow-[0_0_10px_#FF4C00]" />
+
+          <Link
+            to="/contact-us"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-gray-800 transition-colors bg-white border border-gray-300 rounded-lg hover:border-orange-500 hover:text-orange-600 shadow-xs"
+          >
+            <span>Book a Service</span>
+          </Link>
         </div>
 
         {/* Services Grid with Asymmetric Sizing */}
@@ -40,49 +92,59 @@ export default function ServicesSection() {
           {services.map((service, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.06, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: idx * 0.05, duration: 0.5 }}
               viewport={{ once: true, amount: 0.1 }}
-              className={`relative group ${service.size}`}
+              className={`flex flex-col ${service.size}`}
             >
               {/* Card Container */}
-              <div className="relative h-full overflow-hidden transition-all duration-500 border rounded-2xl bg-white/[0.01] border-white/5 hover:border-brand-orange/30 hover:bg-white/[0.02] hover:shadow-[0_20px_50px_rgba(255,76,0,0.08)] corner-brackets">
+              <div className="flex flex-col h-full overflow-hidden transition-all duration-300 bg-white border border-gray-300 rounded-2xl shadow-xs hover:shadow-lg hover:border-orange-400 hover:-translate-y-1 group">
                 
                 {/* Image Section */}
-                <div className="relative h-48 overflow-hidden sm:h-56">
+                <div className="relative h-48 overflow-hidden bg-gray-100 sm:h-52">
                   <img
                     src={service.img}
                     alt={service.name}
-                    className="object-cover w-full h-full transition-transform duration-700 grayscale-[0.4] group-hover:grayscale-0 group-hover:scale-105"
+                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
                     onError={(e) => (e.currentTarget.src = placeholder)}
                     loading="lazy"
                   />
-                  {/* Overlay Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-90" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-60" />
                   
                   {/* Floating Icon Badge */}
-                  <div className="absolute p-3 transition-all duration-300 border rounded-xl bottom-4 left-4 bg-black/85 backdrop-blur-md border-white/10 text-brand-orange group-hover:bg-brand-orange group-hover:text-white group-hover:border-brand-orange/50 group-hover:shadow-[0_0_15px_rgba(255,76,0,0.4)]">
+                  <div className="absolute p-2.5 transition-colors duration-200 rounded-xl bottom-4 left-4 bg-white/95 backdrop-blur-xs border border-gray-300 text-orange-600 shadow-sm group-hover:bg-orange-500 group-hover:text-white group-hover:border-orange-500">
                     {service.icon}
                   </div>
                 </div>
 
                 {/* Content Section */}
-                <div className="p-6">
-                  <h3 className="mb-2 text-lg font-bold leading-tight tracking-tight text-white transition-colors group-hover:text-brand-orange font-mono">
+                <div className="flex flex-col flex-1 p-6">
+                  <h3 className="mb-2 text-lg font-bold text-gray-900 transition-colors group-hover:text-orange-600">
                     {service.name}
                   </h3>
-                  <p className="text-sm leading-relaxed text-gray-500 font-sans group-hover:text-gray-400 transition-colors">
-                    Professional {service.name.toLowerCase()} using precision tools and industry-standard protocols.
+                  <p className="flex-1 text-sm leading-relaxed text-gray-600">
+                    {service.desc}
                   </p>
-                </div>
 
-                {/* Tech scan line effect */}
-                <div className="absolute inset-x-0 top-0 h-[2px] bg-brand-orange/30 -translate-y-full group-hover:animate-scan pointer-events-none" />
+                  <div className="pt-4 mt-5 border-t border-gray-200 flex items-center justify-between text-xs text-gray-500">
+                    <span className="flex items-center gap-1.5 font-medium text-emerald-700">
+                      <CheckCircle size={14} className="text-emerald-600" />
+                      Lab Verified &amp; Tested
+                    </span>
+                    <Link
+                      to="/contact-us"
+                      className="font-semibold text-orange-600 hover:text-orange-700 transition-colors"
+                    >
+                      Enquire Service &rarr;
+                    </Link>
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );

@@ -1,179 +1,184 @@
-import { Wrench, Monitor, Cpu, ArrowUp, ChevronRight } from "lucide-react";
+import { Wrench, Monitor, Cpu, Award, ChevronRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 
 export default function About() {
-  const [showScrollTop, setShowScrollTop] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 200);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 }
+      transition: { staggerChildren: 0.15 }
     }
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
+  const capabilities = [
+    {
+      icon: <Wrench size={26} className="text-orange-600" />,
+      title: "Precision Micro-Soldering",
+      desc: "Specialized diagnostics for motherboards, GPU rework, power rail tracing, and micro-component replacements under stereo microscopes."
+    },
+    {
+      icon: <Monitor size={26} className="text-orange-600" />,
+      title: "System Setup & Integration",
+      desc: "Comprehensive installation, OS hardening, driver optimization, and peripheral networking for office workstations and institutional setups."
+    },
+    {
+      icon: <Cpu size={26} className="text-orange-600" />,
+      title: "Embedded & Custom Hardware",
+      desc: "Microcontroller development, firmware flashing, custom telemetry sensors, and tailored performance architectures designed to last."
+    }
+  ];
+
+  const milestones = [
+    { label: "Founded in Chennai", detail: "Serving local businesses, institutions, and professionals with integrity since 2011." },
+    { label: "Certified Engineers", detail: "Experienced technicians trained in digital oscilloscopes and BGA rework." },
+    { label: "Official Warranty", detail: "Every service performed in our lab is backed by our customer-first service guarantee." },
+    { label: "100% Genuine Spares", detail: "Direct OEM sourcing for replacement screens, batteries, keyboards, and boards." }
+  ];
+
   return (
-    <div className="relative min-h-screen overflow-hidden text-gray-300 bg-brand-black selection:bg-brand-orange selection:text-white">
+    <div className="relative min-h-screen bg-slate-50 text-gray-900 font-sans pb-20">
       
-      {/* --- SEO TAGS --- */}
+      {/* SEO Tags */}
       <Helmet>
-        <title>About Us | Touch Microsystems</title>
+        <title>About Us | Touch Micro Systems - Chennai's Electronics Specialists</title>
         <meta
           name="description"
-          content="Touch Microsystems has been serving Chennai for over a decade with expert electronics repair, setup, and custom tech solutions. Learn more about our journey."
+          content="Learn about Touch Micro Systems Services in Chennai. Over a decade of excellence in embedded systems, component-level electronics repair, and IT solutions."
         />
         <meta
           name="keywords"
-          content="About Touch Microsystems, electronics repair Chennai, device setup, custom tech solutions"
+          content="About Touch Micro Systems, electronics repair Chennai, device setup, custom tech solutions, embedded systems Chennai"
         />
-
-        <meta property="og:title" content="About Us | Touch Microsystems" />
+        <meta property="og:title" content="About Us | Touch Micro Systems" />
         <meta
           property="og:description"
-          content="Discover Touch Microsystems’ expertise in electronics repair, smart device setup, and tailored technology solutions."
+          content="Discover Touch Micro Systems' expertise in electronics repair, embedded solutions, and tailored technology services."
         />
-        <meta
-          property="og:image"
-          content="https://www.touchmicrosystemservices.in/images/header.png"
-        />
+        <meta property="og:image" content="https://www.touchmicrosystemservices.in/images/header.png" />
         <meta property="og:url" content="https://touchmicrosystems.in/about-us" />
-        <meta property="og:type" content="website" />
-
-        
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About Us | Touch Microsystems" />
-        <meta
-          name="twitter:description"
-          content="Discover Touch Microsystems’ expertise in electronics repair, smart device setup, and tailored technology solutions."
-        />
-        <meta
-          name="twitter:image"
-          content="https://www.touchmicrosystemservices.in/images/header.png"
-        />
       </Helmet>
 
-      {/* --- BACKGROUND GRID EFFECT --- */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" 
-           style={{ backgroundImage: 'linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
-      </div>
-      
-      {/* Decorative Glow */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-orange/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Hero Section */}
+      <div className="relative pt-12 pb-16 bg-white border-b border-gray-300">
+        <div className="max-w-5xl px-4 sm:px-6 mx-auto">
+          
+          <div className="flex items-center justify-between mb-8">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
+            >
+              <span>&larr; Back to Home</span>
+            </Link>
+            <span className="text-xs font-semibold text-orange-600 uppercase tracking-wider">
+              Est. 2011 • Chennai, India
+            </span>
+          </div>
 
-      {/* --- MAIN CONTENT WRAPPER --- */}
-      <div className="relative z-10 max-w-6xl px-6 pt-32 pb-20 mx-auto">
-        
-        {/* --- BACK TO HOME BUTTON (Inside Page Flow) --- */}
-        <div className="absolute top-10 right-6">
-          <Link
-            to="/"
-            className="flex items-center gap-2 px-4 py-2 text-sm font-bold text-white transition-all duration-300 border rounded-full group bg-brand-dark/50 border-white/10 hover:border-brand-orange hover:bg-brand-orange/10 backdrop-blur-sm"
+          <motion.div 
+            className="text-center max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            Back to Home
-            <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
-          </Link>
+            <div className="inline-block px-3.5 py-1 mb-4 border rounded-full border-orange-200 bg-orange-50">
+              <span className="text-xs font-semibold tracking-wide uppercase text-orange-800">Our Company Story</span>
+            </div>
+            
+            <h1 className="mb-5 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+              Engineering <span className="text-orange-600">Excellence</span> &amp; Dedicated Service
+            </h1>
+            
+            <p className="text-base sm:text-lg leading-relaxed text-gray-600">
+              For over a decade, <strong className="text-gray-900 font-semibold">Touch Micro Systems Services</strong> has been a trusted cornerstone of electronics repair and embedded technology solutions in Chennai. We don't just repair devices; we engineer solutions built for durability.
+            </p>
+          </motion.div>
+
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="max-w-6xl px-4 sm:px-6 mx-auto pt-16">
+        
+        {/* Core Pillars */}
+        <div className="mb-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">Core Engineering Disciplines</h2>
+            <p className="mt-2 text-sm text-gray-600">High standards of technical precision applied to every customer requirement.</p>
+          </div>
+
+          <motion.div 
+            className="grid gap-6 md:grid-cols-3"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {capabilities.map((item, idx) => (
+              <motion.div 
+                key={idx}
+                variants={itemVariants}
+                className="p-8 bg-white border border-gray-300 rounded-2xl shadow-xs hover:shadow-lg hover:border-orange-400 transition-all flex flex-col"
+              >
+                <div className="flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-orange-50 border border-orange-200">
+                  {item.icon}
+                </div>
+                <h3 className="mb-2.5 text-xl font-bold text-gray-900">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-gray-600 flex-1">
+                  {item.desc}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
 
-        <motion.div 
-          className="mb-20 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="inline-block px-3 py-1 mb-4 border rounded-full border-brand-orange/30 bg-brand-orange/10">
-             <span className="text-xs font-bold tracking-widest uppercase text-brand-orange">Our Story</span>
+        {/* Story & Facility Grid */}
+        <div className="grid items-center gap-10 lg:grid-cols-12 mb-16 p-8 sm:p-10 bg-white border border-gray-300 rounded-2xl shadow-xs">
+          <div className="lg:col-span-6 space-y-4">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-orange-600 uppercase tracking-wider">
+              <Award size={15} />
+              <span>10+ Years of Field Experience</span>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900">
+              Laboratory-Grade Diagnostics in Iyyappanthangal
+            </h3>
+            <p className="text-sm leading-relaxed text-gray-600">
+              Located on Mount Poonamallee Road in Ramachandran Nagar, our service center operates with specialized equipment including precision soldering irons, digital multimeters, variable power supplies, and logic analyzers.
+            </p>
+            <p className="text-sm leading-relaxed text-gray-600">
+              We take pride in transparent pricing, thorough diagnostic documentation, and maintaining a personal relationship with every client who entrusts their hardware to us.
+            </p>
+
+            <div className="pt-2">
+              <Link
+                to="/contact-us"
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-xl shadow-xs transition-colors"
+              >
+                <span>Visit Our Lab Today</span>
+                <ChevronRight size={16} />
+              </Link>
+            </div>
           </div>
-          <h1 className="mb-6 text-4xl font-bold tracking-tight text-white md:text-5xl">
-            ENGINEERING <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-orange-400">EXCELLENCE</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-lg leading-relaxed text-gray-400">
-            For over a decade, <strong className="text-white">Touch Micro System Services</strong> has been the backbone of electronics repair in Chennai. 
-            We don't just fix devices; we engineer solutions that last.
-          </p>
-        </motion.div>
 
-        {/* --- CARDS GRID --- */}
-        <motion.div 
-          className="grid gap-8 md:grid-cols-3"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Card 1 */}
-          <motion.div variants={itemVariants} className="group relative p-8 bg-[#111111] border border-white/5 rounded-xl hover:border-brand-orange/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,76,0,0.1)]">
-            <div className="absolute top-0 right-0 p-4 transition-opacity opacity-10 group-hover:opacity-20">
-              <Wrench size={64} />
-            </div>
-            <div className="flex items-center justify-center w-12 h-12 mb-6 transition-colors border rounded-lg bg-brand-dark border-white/10 group-hover:border-brand-orange group-hover:text-brand-orange">
-              <Wrench size={24} className="text-gray-300 group-hover:text-brand-orange" />
-            </div>
-            <h3 className="mb-3 text-xl font-bold text-white">Expert Repairs</h3>
-            <p className="text-sm leading-relaxed text-gray-400">
-              Precision diagnostics for Laptops, Desktops, and Industrial Electronics using advanced component-level tools.
-            </p>
-          </motion.div>
+          <div className="lg:col-span-6 grid gap-4 sm:grid-cols-2">
+            {milestones.map((m, idx) => (
+              <div key={idx} className="p-5 bg-slate-50 border border-gray-300 rounded-xl">
+                <div className="flex items-center gap-2 mb-1.5 text-sm font-bold text-gray-900">
+                  <CheckCircle2 size={16} className="text-emerald-600 flex-shrink-0" />
+                  <span>{m.label}</span>
+                </div>
+                <p className="text-xs text-gray-600 leading-relaxed pl-6">{m.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
 
-          {/* Card 2 */}
-          <motion.div variants={itemVariants} className="group relative p-8 bg-[#111111] border border-white/5 rounded-xl hover:border-brand-orange/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,76,0,0.1)]">
-             <div className="absolute top-0 right-0 p-4 transition-opacity opacity-10 group-hover:opacity-20">
-              <Monitor size={64} />
-            </div>
-            <div className="flex items-center justify-center w-12 h-12 mb-6 transition-colors border rounded-lg bg-brand-dark border-white/10 group-hover:border-brand-orange group-hover:text-brand-orange">
-              <Monitor size={24} className="text-gray-300 group-hover:text-brand-orange" />
-            </div>
-            <h3 className="mb-3 text-xl font-bold text-white">Device Setup</h3>
-            <p className="text-sm leading-relaxed text-gray-400">
-              Complete installation and optimization for Smart TVs, Home Networks, and Office Automation systems.
-            </p>
-          </motion.div>
-
-          {/* Card 3 */}
-          <motion.div variants={itemVariants} className="group relative p-8 bg-[#111111] border border-white/5 rounded-xl hover:border-brand-orange/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,76,0,0.1)]">
-             <div className="absolute top-0 right-0 p-4 transition-opacity opacity-10 group-hover:opacity-20">
-              <Cpu size={64} />
-            </div>
-            <div className="flex items-center justify-center w-12 h-12 mb-6 transition-colors border rounded-lg bg-brand-dark border-white/10 group-hover:border-brand-orange group-hover:text-brand-orange">
-              <Cpu size={24} className="text-gray-300 group-hover:text-brand-orange" />
-            </div>
-            <h3 className="mb-3 text-xl font-bold text-white">Tech Solutions</h3>
-            <p className="text-sm leading-relaxed text-gray-400">
-              Custom-tailored software configurations, hardware upgrades, and integrated system architecture tailored to your needs.
-            </p>
-          </motion.div>
-
-        </motion.div>
       </div>
-
-      {/* --- SCROLL TO TOP --- */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed z-50 p-4 text-white transition-all rounded-full shadow-lg bottom-6 right-6 bg-brand-orange hover:bg-orange-600 animate-fade-in-up"
-        >
-          <ArrowUp size={20} />
-        </button>
-      )}
     </div>
   );
 }

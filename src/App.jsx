@@ -5,16 +5,16 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import FloatingHUD from "./components/FloatingHUD";
 
-// Lazy load secondary pages to optimize initial bundle size and speed up FCP
+// Lazy load secondary pages to optimize initial bundle size
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 
-// Tech-themed loading spinner fallback
+// Clean light-theme loading spinner fallback
 function TechLoader() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] bg-brand-black font-mono">
-      <div className="w-10 h-10 border-2 rounded-full border-brand-orange border-t-transparent animate-spin mb-4" />
-      <span className="text-xs tracking-widest text-gray-500 uppercase">Loading_Module...</span>
+    <div className="flex flex-col items-center justify-center min-h-[60vh] bg-white font-sans">
+      <div className="w-9 h-9 border-3 rounded-full border-orange-500 border-t-transparent animate-spin mb-3" />
+      <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">Loading...</span>
     </div>
   );
 }
@@ -31,18 +31,13 @@ function ScrollToTop() {
 }
 
 function AppContent() {
-  const location = useLocation();
-
-  // Updated to match your actual Route paths
-  const hideNavbar = location.pathname === "/about-us" || location.pathname === "/contact-us";
-
   return (
-    <div className="flex flex-col min-h-screen bg-[#0A0A0A]">
-      {/* Navbar (Only shows if NOT on About or Contact pages) */}
-      {!hideNavbar && <Navbar />}
+    <div className="flex flex-col min-h-screen bg-white text-gray-900">
+      {/* Global Navbar */}
+      <Navbar />
 
-      {/* Main Content Wrapper with pt-24 top padding when Navbar is visible */}
-      <main className={`flex-grow ${!hideNavbar ? "pt-24" : ""}`}>
+      {/* Main Content Wrapper */}
+      <main className="flex-grow pt-28 sm:pt-32">
         <Suspense fallback={<TechLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -52,10 +47,10 @@ function AppContent() {
         </Suspense>
       </main>
 
-      {/* Floating HUD Panel Overlay */}
+      {/* Floating Action Elements (WhatsApp & Support) */}
       <FloatingHUD />
 
-      {/* Footer */}
+      {/* Light Global Footer */}
       <Footer />
     </div>
   );
