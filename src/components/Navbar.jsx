@@ -67,7 +67,7 @@ export default function Navbar() {
             <img
               src="/images/header.png"
               alt="Touch Micro System Services Logo"
-              className="object-contain h-11 sm:h-14 md:h-16 w-auto transition-transform duration-200 group-hover:scale-105"
+              className="object-contain h-12 sm:h-14 md:h-16 w-auto transition-transform duration-200 group-hover:scale-105"
               loading="eager"
             />
           </Link>
@@ -134,17 +134,17 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Toggle Button */}
+          {/* Mobile Toggle Button (Guaranteed 44x44px touch target) */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle navigation menu"
-            className="p-2 text-gray-800 transition-colors border border-gray-300 rounded-xl md:hidden bg-white hover:bg-orange-50 hover:text-orange-600 shadow-xs"
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-800 transition-colors border border-gray-300 rounded-xl md:hidden bg-white hover:bg-orange-50 hover:text-orange-600 shadow-xs"
           >
             {isOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
 
-        {/* --- MOBILE NAVBAR DROPDOWN (SOLID WHITE WITH VISIBLE OUTLINE) --- */}
+        {/* --- MOBILE NAVBAR DROPDOWN --- */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -154,7 +154,7 @@ export default function Navbar() {
               transition={{ duration: 0.22, ease: "easeInOut" }}
               className="md:hidden overflow-hidden pt-3 border-t border-gray-300 mt-2.5 bg-white"
             >
-              <div className="space-y-1.5 pb-2">
+              <div className="space-y-2 pb-2">
                 {navLinks.map((link) => {
                   if (link.type === "home") {
                     const isHome = location.pathname === "/" && !location.state?.scrollTo;
@@ -162,9 +162,9 @@ export default function Navbar() {
                       <button
                         key={link.name}
                         onClick={scrollToTop}
-                        className={`w-full py-2.5 px-3.5 text-base font-semibold text-left rounded-xl transition-colors border ${
+                        className={`w-full min-h-[44px] flex items-center px-4 text-base font-semibold text-left rounded-xl transition-colors border ${
                           isHome 
-                            ? "bg-orange-50 text-orange-600 border-orange-200" 
+                            ? "bg-orange-50 text-orange-600 border-orange-200 font-bold" 
                             : "text-gray-800 border-transparent hover:bg-orange-50/70 hover:text-orange-600"
                         }`}
                       >
@@ -177,7 +177,7 @@ export default function Navbar() {
                       <button
                         key={link.name}
                         onClick={() => scrollToSection(link.id)}
-                        className="w-full py-2.5 px-3.5 text-base font-semibold text-left text-gray-800 rounded-xl transition-colors border border-transparent hover:bg-orange-50/70 hover:text-orange-600"
+                        className="w-full min-h-[44px] flex items-center px-4 text-base font-semibold text-left text-gray-800 rounded-xl transition-colors border border-transparent hover:bg-orange-50/70 hover:text-orange-600"
                       >
                         {link.name}
                       </button>
@@ -189,9 +189,9 @@ export default function Navbar() {
                       key={link.name}
                       to={link.path}
                       onClick={scrollToTop}
-                      className={`block w-full py-2.5 px-3.5 text-base font-semibold text-left rounded-xl transition-colors border ${
+                      className={`min-h-[44px] flex items-center w-full px-4 text-base font-semibold text-left rounded-xl transition-colors border ${
                         isActive 
-                          ? "bg-orange-50 text-orange-600 border-orange-200" 
+                          ? "bg-orange-50 text-orange-600 border-orange-200 font-bold" 
                           : "text-gray-800 border-transparent hover:bg-orange-50/70 hover:text-orange-600"
                       }`}
                     >
@@ -199,6 +199,21 @@ export default function Navbar() {
                     </Link>
                   );
                 })}
+
+                {/* Mobile Get a Quote CTA */}
+                <div className="pt-2">
+                  <Link
+                    to="/contact-us"
+                    onClick={() => {
+                      scrollToTop();
+                      setIsOpen(false);
+                    }}
+                    className="w-full min-h-[44px] flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-bold text-white transition-all rounded-xl bg-orange-500 hover:bg-orange-600 shadow-sm"
+                  >
+                    <span>Get a Quote</span>
+                    <ArrowRight size={15} />
+                  </Link>
+                </div>
               </div>
             </motion.div>
           )}

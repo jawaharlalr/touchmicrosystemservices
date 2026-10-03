@@ -18,57 +18,57 @@ export default function AccessoriesSection() {
   ];
 
   return (
-    <section id="accessories" className="relative py-20 bg-slate-50 border-t border-gray-300">
+    <section id="accessories" className="relative py-14 sm:py-16 bg-slate-50 border-t border-gray-300">
       <div className="relative z-10 px-4 sm:px-6 mx-auto max-w-7xl">
         
         {/* Section Header */}
-        <div className="mb-14 text-center">
+        <div className="mb-10 text-center">
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 mb-3.5 border rounded-full border-orange-200 bg-orange-50"
+            className="inline-flex items-center gap-2 px-3.5 py-1 mb-3 border rounded-full border-orange-200 bg-orange-50"
           >
             <Cog size={14} className="text-orange-600" />
             <span className="text-xs font-semibold tracking-wide uppercase text-orange-800">
               Genuine Spare Parts
             </span>
           </motion.div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-gray-900">
             Parts &amp; <span className="text-orange-600">Accessories</span>
           </h2>
-          <p className="max-w-xl mx-auto mt-3 text-base text-gray-600">
+          <p className="max-w-xl mx-auto mt-2 text-xs sm:text-sm text-gray-600">
             Original replacement components and performance upgrades available for all major PC and laptop brands.
           </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2">
           
           {/* Laptop Accessories Category */}
           <motion.div 
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
             viewport={{ once: true }}
-            className="p-8 bg-white border border-gray-300 rounded-2xl shadow-xs"
+            className="p-5 sm:p-6 bg-white border border-gray-300 rounded-2xl shadow-xs"
           >
-            <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-gray-200">
-              <div className="p-3 border rounded-xl bg-orange-50 border-orange-200 text-orange-600">
-                <Laptop size={22} />
+            <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-200">
+              <div className="p-2.5 border rounded-xl bg-orange-50 border-orange-200 text-orange-600">
+                <Laptop size={20} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900">Laptop Spares &amp; Upgrades</h3>
+                <h3 className="text-lg font-bold text-gray-900">Laptop Spares &amp; Upgrades</h3>
                 <p className="text-xs text-gray-500">Genuine OEM compatibility</p>
               </div>
             </div>
             
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {laptopAccessories.map((item, idx) => (
                 <li
                   key={idx}
-                  className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50 border border-gray-300 hover:border-orange-400 hover:bg-orange-50/40 transition-colors"
+                  className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-gray-200 hover:border-orange-400 hover:bg-orange-50/40 transition-colors"
                 >
-                  <CheckCircle2 size={15} className="flex-shrink-0 text-orange-600" />
-                  <span className="text-xs sm:text-sm font-medium text-gray-800 leading-tight">
+                  <CheckCircle2 size={14} className="flex-shrink-0 text-orange-600" />
+                  <span className="text-xs font-medium text-gray-800 leading-tight">
                     {item}
                   </span>
                 </li>
@@ -78,30 +78,30 @@ export default function AccessoriesSection() {
 
           {/* Desktop Accessories Category */}
           <motion.div 
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 16 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
             viewport={{ once: true }}
-            className="p-8 bg-white border border-gray-300 rounded-2xl shadow-xs"
+            className="p-5 sm:p-6 bg-white border border-gray-300 rounded-2xl shadow-xs"
           >
-            <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-gray-200">
-              <div className="p-3 border rounded-xl bg-orange-50 border-orange-200 text-orange-600">
-                <Monitor size={22} />
+            <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-200">
+              <div className="p-2.5 border rounded-xl bg-orange-50 border-orange-200 text-orange-600">
+                <Monitor size={20} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900">Desktop Components</h3>
+                <h3 className="text-lg font-bold text-gray-900">Desktop Components</h3>
                 <p className="text-xs text-gray-500">Performance parts &amp; peripherals</p>
               </div>
             </div>
             
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {desktopAccessories.map((item, idx) => (
                 <li
                   key={idx}
-                  className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50 border border-gray-300 hover:border-orange-400 hover:bg-orange-50/40 transition-colors"
+                  className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-gray-200 hover:border-orange-400 hover:bg-orange-50/40 transition-colors"
                 >
-                  <CheckCircle2 size={15} className="flex-shrink-0 text-orange-600" />
-                  <span className="text-xs sm:text-sm font-medium text-gray-800 leading-tight">
+                  <CheckCircle2 size={14} className="flex-shrink-0 text-orange-600" />
+                  <span className="text-xs font-medium text-gray-800 leading-tight">
                     {item}
                   </span>
                 </li>
@@ -112,10 +112,10 @@ export default function AccessoriesSection() {
         </div>
 
         {/* Footer info tag */}
-        <div className="flex flex-wrap justify-center gap-6 sm:gap-10 py-6 mt-12 border-t border-gray-300 text-xs font-medium text-gray-500">
-          <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-emerald-600" /> 100% Genuine OEM Spares</span>
-          <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-emerald-600" /> Replacement Warranty Included</span>
-          <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-emerald-600" /> On-Spot Technical Installation</span>
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-8 py-4 mt-8 border-t border-gray-300 text-xs font-medium text-gray-500">
+          <span className="flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-600" /> 100% Genuine OEM Spares</span>
+          <span className="flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-600" /> Replacement Warranty Included</span>
+          <span className="flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-600" /> In-Store Technical Installation</span>
         </div>
       </div>
     </section>

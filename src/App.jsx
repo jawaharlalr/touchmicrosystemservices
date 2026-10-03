@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import FloatingHUD from "./components/FloatingHUD";
+import FloatingActions from "./components/FloatingActions";
 
 // Lazy load secondary pages to optimize initial bundle size
 const About = lazy(() => import("./pages/About"));
@@ -37,7 +38,7 @@ function AppContent() {
       <Navbar />
 
       {/* Main Content Wrapper */}
-      <main className="flex-grow pt-28 sm:pt-32">
+      <main className="flex-grow pt-24 sm:pt-28">
         <Suspense fallback={<TechLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -47,8 +48,11 @@ function AppContent() {
         </Suspense>
       </main>
 
-      {/* Floating Action Elements (WhatsApp & Support) */}
+      {/* Floating Lab Info HUD (Bottom Left) */}
       <FloatingHUD />
+
+      {/* Floating Actions: WhatsApp & Back-To-Top (Bottom Right - Non-overlapping) */}
+      <FloatingActions />
 
       {/* Light Global Footer */}
       <Footer />

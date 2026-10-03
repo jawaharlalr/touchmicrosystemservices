@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, Tag, ArrowRight } from "lucide-react";
+import { ShoppingBag, Tag, ArrowRight, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function ProductsSection() {
@@ -8,40 +8,52 @@ export default function ProductsSection() {
 
   const products = [
     { 
-      name: "Business & Gaming Laptops", 
+      name: "Business & Performance Laptops", 
+      brand: "Dell • HP • Lenovo • Acer • Asus",
       category: "Computers", 
-      spec: "Latest generation Core & Ryzen processors, SSD storage, high-resolution IPS displays.",
-      img: "/images/laptop_product.png" 
+      spec: "Intel Core / AMD Ryzen, Fast NVMe SSD, 8GB/16GB DDR4/DDR5, FHD Anti-Glare Displays.",
+      condition: "Brand New / Certified Warranty",
+      img: "/images/laptop.webp" 
     },
     { 
-      name: "Custom Workstation Desktops", 
+      name: "Custom Desktop Workstations", 
+      brand: "Custom Architecture / Dell / HP",
       category: "Computers", 
-      spec: "Tailored configurations for software development, CAD rendering, and business computing.",
-      img: "/images/desktop_product.png" 
+      spec: "Optimized configurations for Engineering CAD, software development, office productivity, and gaming.",
+      condition: "Tested & Verified Lab Warranty",
+      img: "/images/desktop.webp" 
     },
     { 
-      name: "Enterprise Rack & Tower Servers", 
+      name: "Enterprise Tower & Rack Servers", 
+      brand: "Dell PowerEdge • HP ProLiant",
       category: "Networking", 
-      spec: "High-uptime hardware, redundant power supplies, multi-core architecture for centralized data.",
-      img: "/images/server_product.png" 
+      spec: "Multi-core server processors, ECC RAM, hardware RAID controllers, and redundant hot-swap PSUs.",
+      condition: "Enterprise Hardware Warranty",
+      img: "/images/server.webp" 
     },
     { 
       name: "Commercial Office Printers", 
+      brand: "HP • Canon • Epson",
       category: "Office Equipment", 
-      spec: "High-speed laser and multi-function ink-tank printers with duplex scanning and networking.",
-      img: "/images/printer_product.png" 
+      spec: "High-yield monochrome laser & ink-tank multifunction printers with duplex scanning and network connectivity.",
+      condition: "Manufacturer / Tested Warranty",
+      img: "/images/printer.webp" 
     },
     { 
       name: "Surveillance & IP CCTV Systems", 
+      brand: "CP Plus • Hikvision • Dahua",
       category: "Security", 
-      spec: "High-definition night vision IP cameras, multi-channel NVR arrays, and mobile monitoring.",
-      img: "/images/camera_product.png" 
+      spec: "High-resolution IR night vision cameras, multi-channel NVR arrays, PoE switches, and live mobile viewing.",
+      condition: "Official Warranty & Setup Support",
+      img: "/images/camera.webp" 
     },
     { 
       name: "Professional Monitors & Displays", 
+      brand: "LG • Dell • Samsung • Acer",
       category: "Peripherals", 
-      spec: "IPS color-calibrated displays, ergonomic stands, ultra-wide and dual-monitor configurations.",
-      img: "/images/monitor_product.png" 
+      spec: "IPS color-accurate displays, Full HD & 2K resolution, HDMI/DisplayPort inputs, and ergonomic height-adjustable stands.",
+      condition: "Brand Manufacturer Warranty",
+      img: "/images/monitor.webp" 
     },
   ];
 
@@ -59,32 +71,30 @@ export default function ProductsSection() {
     return true;
   });
 
-  const placeholder = "/images/placeholder.webp";
-
   return (
-    <section id="products" className="relative py-20 bg-slate-50 border-t border-gray-300">
+    <section id="products" className="relative py-14 sm:py-16 bg-slate-50 border-t border-gray-300">
       <div className="relative z-10 px-4 sm:px-6 mx-auto max-w-7xl">
         
         {/* Section Header */}
-        <div className="flex flex-col items-start justify-between gap-4 mb-12 md:flex-row md:items-end">
+        <div className="flex flex-col items-start justify-between gap-4 mb-10 md:flex-row md:items-end">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 mb-3.5 border rounded-full border-orange-200 bg-orange-50">
+            <div className="inline-flex items-center gap-2 px-3 py-1 mb-3 border rounded-full border-orange-200 bg-orange-50">
               <ShoppingBag size={14} className="text-orange-600" />
               <span className="text-xs font-semibold tracking-wide text-orange-800 uppercase">
                 Hardware Inventory
               </span>
             </div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-gray-900">
               Commercial &amp; Enterprise <span className="text-orange-600">Products</span>
             </h2>
-            <p className="max-w-2xl mt-3 text-base text-gray-600">
-              Quality-tested enterprise hardware, corporate computing devices, and precision office systems.
+            <p className="max-w-2xl mt-2 text-sm sm:text-base text-gray-600">
+              Lab-tested commercial hardware, corporate computing devices, and authorized brand solutions available in Chennai.
             </p>
           </div>
 
           <Link
             to="/contact-us"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-orange-600 hover:text-orange-700"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-orange-600 hover:text-orange-700"
           >
             <span>Request Bulk Quotation</span>
             <ArrowRight size={15} />
@@ -92,12 +102,12 @@ export default function ProductsSection() {
         </div>
 
         {/* Categories Tab Selector */}
-        <div className="flex flex-wrap gap-2.5 mb-10">
+        <div className="flex flex-wrap gap-2 mb-8">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveTab(cat)}
-              className={`px-4 py-2 text-xs font-semibold tracking-wide uppercase transition-all duration-200 rounded-lg ${
+              className={`px-3.5 py-1.5 text-xs font-semibold tracking-wide uppercase transition-all duration-200 rounded-lg ${
                 activeTab === cat
                   ? "bg-orange-500 text-white shadow-xs"
                   : "bg-white text-gray-700 border border-gray-300 hover:border-orange-400 hover:text-orange-600"
@@ -111,7 +121,7 @@ export default function ProductsSection() {
         {/* Product Grid */}
         <motion.div 
           layout
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
           <AnimatePresence mode="popLayout">
             {filteredProducts.map((product) => (
@@ -122,18 +132,17 @@ export default function ProductsSection() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.3 }}
-                className="flex flex-col overflow-hidden transition-all duration-300 bg-white border border-gray-300 rounded-2xl shadow-xs hover:shadow-lg hover:border-orange-400 group"
+                className="flex flex-col overflow-hidden transition-all duration-300 bg-white border border-gray-300 rounded-2xl shadow-xs hover:shadow-md hover:border-orange-400 group"
               >
-                {/* Image Container with Light Background */}
-                <div className="relative w-full h-52 overflow-hidden bg-slate-50/80 border-b border-gray-200 flex items-center justify-center p-6">
+                {/* Image Container with Consistent Aspect Ratio */}
+                <div className="relative w-full h-44 sm:h-48 overflow-hidden bg-slate-50 border-b border-gray-200 flex items-center justify-center p-4">
                   <img
                     src={product.img}
                     alt={product.name}
                     className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105"
-                    onError={(e) => (e.currentTarget.src = placeholder)}
                     loading="lazy"
                   />
-                  <div className="absolute top-3.5 left-3.5">
+                  <div className="absolute top-3 left-3">
                     <span className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[11px] font-medium text-gray-700 bg-white border border-gray-300 rounded-full shadow-xs">
                       <Tag size={10} className="text-orange-600" />
                       {product.category}
@@ -142,24 +151,35 @@ export default function ProductsSection() {
                 </div>
 
                 {/* Product Info */}
-                <div className="flex flex-col flex-1 p-6">
-                  <h3 className="mb-2 text-lg font-bold text-gray-900 group-hover:text-orange-600 transition-colors">
+                <div className="flex flex-col flex-1 p-5">
+                  <h3 className="text-base font-bold text-gray-900 group-hover:text-orange-600 transition-colors mb-1">
                     {product.name}
                   </h3>
-                  <p className="flex-1 text-sm leading-relaxed text-gray-600 mb-5">
+                  
+                  {/* Brand Line */}
+                  <p className="text-xs font-semibold text-orange-600 mb-2">
+                    {product.brand}
+                  </p>
+
+                  {/* Key Specification */}
+                  <p className="flex-1 text-xs sm:text-sm leading-relaxed text-gray-600 mb-4">
                     {product.spec}
                   </p>
 
-                  <div className="pt-4 border-t border-gray-200 flex items-center justify-between">
-                    <span className="text-xs font-medium text-emerald-700">Official Warranty</span>
+                  {/* Warranty/Condition & CTA */}
+                  <div className="pt-3 border-t border-gray-200 flex items-center justify-between">
+                    <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-700">
+                      <ShieldCheck size={13} className="text-emerald-600" />
+                      {product.condition}
+                    </span>
                     <a
-                      href={`https://wa.me/919790741494?text=Hello%20Touch%20Micro%20Systems!%20I%20would%20like%20to%20get%20a%20quote%20for:%20${encodeURIComponent(product.name)}`}
+                      href={`https://wa.me/919790741494?text=Hello%20Touch%20Micro%20Systems!%20I%20would%20like%20to%20get%20a%20quote%20for:%20${encodeURIComponent(product.name)}%20(${encodeURIComponent(product.brand)})`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-lg shadow-xs transition-colors"
+                      className="inline-flex items-center gap-1 px-3.5 py-1.5 text-xs font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-lg shadow-xs transition-colors"
                     >
                       <span>Get Quote</span>
-                      <ArrowRight size={13} />
+                      <ArrowRight size={12} />
                     </a>
                   </div>
                 </div>

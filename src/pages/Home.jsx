@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Helmet } from "react-helmet-async";
-import { ArrowUp } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
 
 import HeroSection from "../components/sections/HeroSection";
 import EmbeddedSolutions from "../components/sections/EmbeddedSolutions";
@@ -17,16 +14,6 @@ import GoogleLiveReviews from "../components/sections/GoogleReviews";
 import CtaSection from "../components/sections/CtaSection";
 
 export default function Home() {
-  const [showScroll, setShowScroll] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setShowScroll(window.scrollY > 300);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
-
   return (
     <div className="relative min-h-screen bg-white text-gray-900 overflow-x-hidden font-sans">
       
@@ -84,39 +71,6 @@ export default function Home() {
 
       {/* 11. DISTINCTIVE LIGHT CTA SECTION (Warm Light Orange Tint #FFF7ED) */}
       <CtaSection />
-
-      {/* --- FLOATING ACTIONS (Bottom Right) --- */}
-      
-      {/* Floating WhatsApp Button */}
-      <motion.a
-        href="https://wa.me/919790741494?text=Hello%20Touch%20Micro%20System%20Services!"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat with Touch Micro Systems on WhatsApp"
-        className={`fixed right-6 z-50 p-3.5 rounded-full bg-[#25D366] text-white shadow-lg shadow-emerald-500/25 hover:bg-[#20bd5a] hover:scale-108 transition-all duration-200 flex items-center justify-center ${
-          showScroll ? "bottom-20" : "bottom-6"
-        }`}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-      >
-        <FaWhatsapp size={24} />
-      </motion.a>
-
-      {/* Floating Scroll To Top Button */}
-      <AnimatePresence>
-        {showScroll && (
-          <motion.button
-            onClick={scrollToTop}
-            aria-label="Scroll back to top"
-            className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-orange-500 text-white shadow-md shadow-orange-500/20 hover:bg-orange-600 hover:scale-108 transition-all duration-200 flex items-center justify-center"
-            initial={{ opacity: 0, scale: 0.8, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-          >
-            <ArrowUp size={20} />
-          </motion.button>
-        )}
-      </AnimatePresence>
 
     </div>
   );

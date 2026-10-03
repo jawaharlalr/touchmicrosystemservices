@@ -23,7 +23,7 @@ export default function Footer() {
 
   return (
     <footer className="relative mt-auto bg-slate-50 border-t border-gray-300 text-gray-700">
-      <div className="relative z-10 px-4 sm:px-6 pt-16 pb-12 mx-auto max-w-7xl">
+      <div className="relative z-10 px-4 sm:px-6 pt-12 sm:pt-14 pb-10 mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4 sm:grid-cols-2">
 
           {/* Column 1: Company Info */}
@@ -185,9 +185,19 @@ export default function Footer() {
 
               <div className="flex items-start gap-2.5 pt-1">
                 <MapPin size={16} className="text-orange-600 flex-shrink-0 mt-0.5" />
-                <address className="text-xs not-italic leading-relaxed text-gray-600">
-                  8/42, Mount Poonamallee Road, Ramachandran Nagar, Iyyappanthangal, Chennai - 600056
-                </address>
+                <div>
+                  <address className="text-xs not-italic leading-relaxed text-gray-600">
+                    8/42, Mount Poonamallee Road, Ramachandran Nagar, Iyyappanthangal, Chennai - 600056
+                  </address>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Touch+Micro+Systems+Iyyappanthangal+Chennai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-xs font-semibold text-orange-600 hover:text-orange-700 hover:underline mt-1"
+                  >
+                    Get Directions &rarr;
+                  </a>
+                </div>
               </div>
             </div>
           </div>

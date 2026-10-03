@@ -99,15 +99,15 @@ export default function GoogleLiveReviews() {
   const visibleReviews = showAll ? reviews : reviews.slice(0, 6);
 
   return (
-    <section id="reviews" className="relative py-20 bg-white border-t border-gray-300">
+    <section id="reviews" className="relative py-14 sm:py-16 bg-white border-t border-gray-300">
       <div className="relative z-10 px-4 sm:px-6 mx-auto max-w-7xl">
 
         {/* Header Section */}
-        <div className="flex flex-col items-center mb-14 text-center">
+        <div className="flex flex-col items-center mb-10 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="flex items-center gap-2 px-3.5 py-1 mb-3.5 border rounded-full border-orange-200 bg-orange-50"
+            className="flex items-center gap-2 px-3.5 py-1 mb-3 border rounded-full border-orange-200 bg-orange-50"
           >
             <Star size={14} className="text-orange-600 fill-orange-600" />
             <span className="text-xs font-semibold tracking-wide uppercase text-orange-800">
@@ -115,34 +115,34 @@ export default function GoogleLiveReviews() {
             </span>
           </motion.div>
 
-          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-gray-900">
             Customer <span className="text-orange-600">Reviews &amp; Ratings</span>
           </h2>
-          <p className="max-w-xl mt-3 text-base text-gray-600">
-            Read what our clients have to say about our computer repairs, chip-level diagnostics, and customer service.
+          <p className="max-w-xl mt-2 text-xs sm:text-sm text-gray-600">
+            Direct feedback from verified customers on our computer repairs, chip-level diagnostics, and customer support.
           </p>
 
           {/* Rating Summary Card */}
           {rating && (
-            <div className="mt-8 flex items-center gap-6 px-7 py-3.5 rounded-2xl bg-slate-50 border border-gray-300 shadow-xs">
-              <div className="pr-6 text-left border-r border-gray-300">
-                <p className="text-3xl font-extrabold text-gray-900 leading-none mb-1">{rating.toFixed(1)}</p>
+            <div className="mt-6 flex items-center gap-5 px-5 py-2.5 rounded-2xl bg-slate-50 border border-gray-300 shadow-xs">
+              <div className="pr-5 text-left border-r border-gray-300">
+                <p className="text-2xl font-extrabold text-gray-900 leading-none mb-1">{rating.toFixed(1)}</p>
                 <div className="flex gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} className="text-amber-400 fill-amber-400" />
+                    <Star key={i} size={13} className="text-amber-400 fill-amber-400" />
                   ))}
                 </div>
               </div>
               <div className="text-left">
-                <p className="text-sm font-bold text-gray-900">Google Verified Reviews</p>
-                <p className="text-xs text-gray-500">Based on {count}+ customer ratings</p>
+                <p className="text-xs font-bold text-gray-900">{count ? `${count} Google Reviews` : "Google Verified Reviews"}</p>
+                <p className="text-[11px] text-gray-500">Touch Micro Systems • Chennai</p>
               </div>
             </div>
           )}
         </div>
 
         {/* Reviews Grid */}
-        <div className="grid gap-6 mb-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence>
             {visibleReviews.map((review, index) => {
               const fullText = review.text;
@@ -152,41 +152,41 @@ export default function GoogleLiveReviews() {
                 <motion.div
                   key={index}
                   layout
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className="p-6 transition-all duration-300 bg-white border border-gray-300 rounded-2xl shadow-xs hover:shadow-md hover:border-orange-400 flex flex-col justify-between"
+                  className="p-5 transition-all duration-300 bg-white border border-gray-300 rounded-2xl shadow-xs hover:shadow-md hover:border-orange-400 flex flex-col justify-between"
                 >
                   <div>
                     {/* Reviewer Info */}
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-3">
-                        <div className="flex items-center justify-center w-10 h-10 font-bold text-orange-700 bg-orange-100 rounded-full border border-orange-200">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="flex items-center justify-center w-9 h-9 font-bold text-orange-700 bg-orange-100 rounded-full border border-orange-200 text-xs">
                           {review.author_name?.charAt(0).toUpperCase()}
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-gray-900">{review.author_name}</p>
-                          <p className="text-xs text-gray-500">{review.relative_time_description}</p>
+                          <p className="text-xs sm:text-sm font-bold text-gray-900">{review.author_name}</p>
+                          <p className="text-[11px] text-gray-500">{review.relative_time_description}</p>
                         </div>
                       </div>
                       
                       {/* Quote Icon */}
-                      <Quote size={20} className="text-gray-300" />
+                      <Quote size={18} className="text-gray-300" />
                     </div>
 
                     {/* Stars */}
-                    <div className="flex gap-1 mb-3">
+                    <div className="flex gap-1 mb-2.5">
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          size={14}
+                          size={13}
                           className={i < review.rating ? "text-amber-400 fill-amber-400" : "text-gray-300"}
                         />
                       ))}
                     </div>
 
                     {/* Review Text */}
-                    <p className="text-sm leading-relaxed text-gray-700">
+                    <p className="text-xs sm:text-sm leading-relaxed text-gray-700">
                       {review.expanded ? fullText : shortText}
                       {!review.expanded && fullText.length > 150 ? "..." : ""}
                     </p>
@@ -195,7 +195,7 @@ export default function GoogleLiveReviews() {
                   {fullText.length > 150 && (
                     <button
                       onClick={() => toggleExpand(index)}
-                      className="mt-4 text-xs font-semibold text-orange-600 hover:text-orange-700 text-left"
+                      className="mt-3 text-xs font-semibold text-orange-600 hover:text-orange-700 text-left"
                     >
                       {review.expanded ? "Show Less" : "Read More"}
                     </button>
@@ -207,11 +207,11 @@ export default function GoogleLiveReviews() {
         </div>
 
         {/* Bottom Actions */}
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
           {reviews.length > 6 && (
             <button
               onClick={() => setShowAll(!showAll)}
-              className="px-6 py-3 text-xs font-semibold tracking-wide uppercase transition-all border border-orange-500 rounded-lg text-orange-600 hover:bg-orange-50"
+              className="px-5 py-2.5 text-xs font-semibold tracking-wide uppercase transition-all border border-orange-500 rounded-lg text-orange-600 hover:bg-orange-50"
             >
               {showAll ? "View Less" : `View All ${reviews.length} Reviews`}
             </button>
@@ -221,10 +221,10 @@ export default function GoogleLiveReviews() {
             href={`https://search.google.com/local/writereview?placeid=${PLACE_ID}`}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 text-xs font-semibold text-gray-700 uppercase transition-all bg-white border border-gray-300 rounded-lg hover:border-orange-400 hover:text-orange-600 shadow-xs"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-gray-700 uppercase transition-all bg-white border border-gray-300 rounded-lg hover:border-orange-400 hover:text-orange-600 shadow-xs"
           >
             <span>Write a Review on Google</span>
-            <ExternalLink size={14} />
+            <ExternalLink size={13} />
           </a>
         </div>
 
